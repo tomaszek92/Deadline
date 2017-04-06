@@ -1,0 +1,57 @@
+﻿<div class="row" ng-controller="signUpCtrl">
+    <form class="col s12" name="signUpForm">
+        <div class="row">
+            <div class="col s6">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="signUpEmail"
+                               name="email"
+                               placeholder="Enter email"
+                               type="email"
+                               class="validate"
+                               required
+                               ng-model="email"/>
+                        <label for="signUpEmail">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="signUpPassword"
+                               name="password"
+                               placeholder="Enter password"
+                               type="password"
+                               class="validate"
+                               required
+                               pattern=".{6,}"
+                               ng-model="password"/>
+                        <label for="signUpPassword" data-error="Password must have at least 6 characters long">Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="signUpPasswordConfirm"
+                               name="passwordConfirm"
+                               placeholder="Enter password"
+                               type="password"
+                               class="validate"
+                               ng-model="passwordConfirm"
+                               equals-validation="{{password}}"/>
+                        <label for="signUpPasswordConfirm" data-error="Diffrent passwords">Confrim Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="signUpCompanyName" name="companyName" placeholder="Enter company name" type="text" class="validate" required ng-model="companyName"/>
+                        <label for="signUpCompanyName">Company Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="signUpCompanyLogo" name="companyLogo" placeholder="Enter company logo" type="url" class="validate" required ng-model="companyLogo"/>
+                        <label for="signUpCompanyLogo">Company Logo</label>
+                    </div>
+                    <div class="col s12">
+                        <button class="btn waves-effect" type="submit" ng-click="submit()" ng-disabled="signUpForm.$invalid">Submit<i class="material-icons right">send</i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="row">
+                    <img alt="Company Logo" ng-show="companyLogo" ng-src="{{companyLogo}}"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

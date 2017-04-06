@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Deadline- online game</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/materialize/css/materialize.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="assets/libs/angular/angular.min.js"></script>
+    <script src="assets/libs/angular/angular-resource.min.js"></script>
+    <script src="assets/libs/angular/angular-route.min.js"></script>
+    <script src="assets/libs/jquery/jquery-3.2.0.min.js"></script>
+    <script src="assets/libs/materialize/materialize.min.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/shared/directives/equalsValidation.js"></script>
+    <script src="app/shared/navbar/navbarController.js"></script>
+    <script src="app/shared/userAccountResource.js"></script>
+    <script src="app/shared/currentUserFactory.js"></script>
+    <script src="app/components/signUp/signUpController.js"></script>
+    <script src="app/components/signIn/signInController.js"></script>
+</head>
+<body ng-app="deadline">
+<header>
+    <nav ng-controller="NavbarCtrl" class="nav-extended">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Deadline- {{tab.title}}</a>
+            <a href="#" data-activates="sideNav" class="button-collapse">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+        <ul id="sideNav" class="side-nav fixed">
+            <li ng-repeat="tab in tabs"
+                ng-if="tab.visibleForLoggedUser === isLoggedIn()"
+                ng-class="{'active': tab.isActive}"
+                ng-click="tabClick(tab)">
+                <div ng-if="tab.isDivider" class="divider"></div>
+                <a href="{{tab.href}}"
+                   class="waves-effect"
+                   ng-if="tab.isDivider === false"
+                   ng-class="{'subheader': tab.isSubHeader}">
+                    <i ng-if="tab.icon" class="material-icons">{{tab.icon}}</i>{{tab.title}}
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <div ng-view></div>
+    </div>
+</main>
+<footer></footer>
+
+<script>
+    $(".button-collapse").sideNav();
+</script>
+</body>
+</html>
