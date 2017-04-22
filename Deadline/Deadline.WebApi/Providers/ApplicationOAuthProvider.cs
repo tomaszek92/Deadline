@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -21,7 +18,7 @@ namespace Deadline.WebApi.Providers
         {
             if (publicClientId == null)
             {
-                throw new ArgumentNullException("publicClientId");
+                throw new ArgumentNullException(nameof(publicClientId));
             }
 
             _publicClientId = publicClientId;
@@ -46,7 +43,7 @@ namespace Deadline.WebApi.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user.Id, user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -88,10 +85,11 @@ namespace Deadline.WebApi.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userId, string userName)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
+                {"userId", userId},
                 {"userName", userName}
             };
             return new AuthenticationProperties(data);

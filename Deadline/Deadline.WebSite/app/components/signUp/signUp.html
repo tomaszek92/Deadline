@@ -10,7 +10,7 @@
                                type="email"
                                class="validate"
                                required
-                               ng-model="email" />
+                               ng-model="email"/>
                         <label for="signUpEmail">Email</label>
                     </div>
                     <div class="input-field col s12">
@@ -21,7 +21,7 @@
                                class="validate"
                                required
                                pattern=".{6,}"
-                               ng-model="password" />
+                               ng-model="password"/>
                         <label for="signUpPassword"
                                data-error="Password must have at least 6 characters long">
                             Password
@@ -34,7 +34,7 @@
                                type="password"
                                class="validate"
                                ng-model="passwordConfirm"
-                               equals-validation="{{password}}" />
+                               equals-validation="{{password}}"/>
                         <label for="signUpPasswordConfirm"
                                data-error="Diffrent passwords">
                             Confrim Password
@@ -46,7 +46,7 @@
                                placeholder="Enter company name"
                                type="text"
                                class="validate"
-                               required ng-model="companyName" />
+                               required ng-model="companyName"/>
                         <label for="signUpCompanyName">Company Name</label>
                     </div>
                     <div class="input-field col s12">
@@ -55,14 +55,14 @@
                                placeholder="Enter company logo"
                                type="url"
                                class="validate"
-                               required ng-model="companyLogo" />
+                               required ng-model="companyLogo"/>
                         <label for="signUpCompanyLogo">Company Logo</label>
                     </div>
                     <div class="col s12">
                         <button class="btn waves-effect"
                                 type="submit"
                                 ng-click="submit()"
-                                ng-disabled="signUpForm.$invalid">
+                                ng-disabled="signUpForm.$invalid || submitDisable">
                             Submit<i class="material-icons right">send</i>
                         </button>
                         <div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col s6">
                     <div class="row">
-                        <img alt="Company Logo" ng-show="companyLogo" ng-src="{{companyLogo}}" />
+                        <img alt="Company Logo" ng-show="companyLogo" ng-src="{{companyLogo}}"/>
                     </div>
                 </div>
             </div>

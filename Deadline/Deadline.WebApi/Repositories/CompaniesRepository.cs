@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using Deadline.WebApi.AbstractRepositories;
 using Deadline.WebApi.Models;
@@ -26,6 +27,14 @@ namespace Deadline.WebApi.Repositories
             using (var db = new DeadlineContext())
             {
                 return await db.Companies.SingleOrDefaultAsync(company => company.AspNetUsers.Email == email);
+            }
+        }
+
+        public async Task<Companies> GetAsync(Guid userId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                return await db.Companies.SingleOrDefaultAsync(company => company.AspNetUsers.Id == userId.ToString());
             }
         }
     }

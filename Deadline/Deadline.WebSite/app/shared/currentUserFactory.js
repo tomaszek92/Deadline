@@ -6,14 +6,20 @@ deadlineApp.factory("currentUser",
             isLoggedIn: false,
             username: "",
             companyName: "",
-            token: ""
+            token: "",
+            userId: ""
         };
 
-        var setProfile = function(username, companyName, token) {
+        var setToken = function(token) {
+            profile.token = token;
+
+        }
+
+        var setProfile = function(username, companyName, userId) {
             profile.username = username;
             profile.companyName = companyName;
-            profile.token = token;
             profile.isLoggedIn = true;
+            profile.userId = userId;
         };
 
         var getProfile = function() {
@@ -25,9 +31,11 @@ deadlineApp.factory("currentUser",
             profile.companyName = "";
             profile.token = "";
             profile.isLoggedIn = false;
+            profile.userId = "";
         }
 
         return {
+            setToken: setToken,
             setProfile: setProfile,
             getProfile: getProfile,
             clearProfile: clearProfile

@@ -8,7 +8,8 @@ namespace Deadline.WebApi.App_Start
     {
         public static void Register()
         {
-            Mapper.Register<Companies, Company>();
+            Mapper.Register<Companies, Company>()
+                .Member(dest => dest.UserId, src => src.AspNetUserId);
         }
     }
 }

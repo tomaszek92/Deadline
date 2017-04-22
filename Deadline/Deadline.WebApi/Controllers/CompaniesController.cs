@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
@@ -20,10 +21,13 @@ namespace Deadline.WebApi.Controllers
             _companiesRepository = companiesRepository;
         }
 
+        [HttpGet]
+        [Route("api/companies/{userId}")]
         [ResponseType(typeof(Company))]
-        public async Task<IHttpActionResult> Get(string email)
+        public async Task<IHttpActionResult> GetByUserId(string userId)
         {
-            var company = await _companiesRepository.GetAsync(email);
+            Guid userIdGuid = Guid.Parse(userId);
+            var company = await _companiesRepository.GetAsync(userIdGuid);
             if (company == null)
             {
                 return NotFound();

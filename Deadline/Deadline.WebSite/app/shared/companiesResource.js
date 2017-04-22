@@ -1,29 +1,14 @@
 ﻿"use strict";
 
-//deadlineApp.factory("companiesResource",
-//    function ($resource, appSettings, currentUser) {
-//        return $resource(
-//            appSettings.apiPath + "api/companies?email=:email",
-//            { email: "@email" },
-//            {
-//                get: {
-//                    headers: {
-//                        Authorization: "Bearer " + currentUser.getProfile.token
-//                    }
-//                }
-//            });
-//    });
-
-
 deadlineApp.factory("companiesResource",
     function($resource, appSettings, currentUser) {
         return {
             get: function() {
                 return $resource(
-                    appSettings.apiPath + "api/companies?email=:email",
-                    { email: "@email" },
+                    appSettings.apiPath + "api/companies/:userId",
+                    { userId: "@userId" },
                     {
-                        byEmail: {
+                        byUserId: {
                             headers: {
                                 Authorization: "Bearer " + currentUser.getProfile().token
                             }
