@@ -11,19 +11,29 @@
     <script src="assets/libs/jquery/jquery-3.2.0.min.js"></script>
     <script src="assets/libs/materialize/materialize.min.js"></script>
 
+    <!--main-->
     <script src="app/app.js"></script>
+
+    <!--directives-->
     <script src="app/shared/directives/equalsValidation.js"></script>
-    <script src="app/shared/navbar/navbarController.js"></script>
-    <script src="app/shared/userAccountResource.js"></script>
+
+    <!--factories, services-->
     <script src="app/shared/currentUserFactory.js"></script>
+    <script src="app/shared/userAccountResource.js"></script>
+    <script src="app/shared/companiesResource.js"></script>
+
+    <!--controllers-->
+    <script src="app/shared/navbar/navbarController.js"></script>
     <script src="app/components/signUp/signUpController.js"></script>
     <script src="app/components/signIn/signInController.js"></script>
+    <script src="app/components/dashoboard/dashboardController.js"></script>
+    <script src="app/components/employeesHire/employeesHireController.js"></script>
 </head>
 <body ng-app="deadline">
 <header>
     <nav ng-controller="NavbarCtrl" class="nav-extended">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Deadline- {{tab.title}}</a>
+            <a href="#" class="brand-logo center">Deadline - {{pageTitle}}</a>
             <a href="#" data-activates="sideNav" class="button-collapse">
                 <i class="material-icons">menu</i>
             </a>

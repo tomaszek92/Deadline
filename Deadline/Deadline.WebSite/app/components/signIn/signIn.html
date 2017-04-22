@@ -1,1 +1,37 @@
-﻿<div>SIGN IN</div>
+﻿<div class="row" ng-controller="signInCtrl">
+    <form class="col s12" name="singInForm">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="signInEmail"
+                       name="email"
+                       type="email"
+                       placeholder="Enter email"
+                       class="validate"
+                       required
+                       ng-model="email"/>
+                <label for="signInEmail">Email</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="signInPassword"
+                       name="password"
+                       type="password"
+                       placeholder="Enter password"
+                       class="validate"
+                       required
+                       pattern=".{6,}"
+                       ng-model="password"/>
+                <label for="signInPassword"
+                       data-error="Password must have at least 6 characters long">Password</label>
+            </div>
+            <div class="col s12">
+                <button class="btn waves-effect"
+                        type="submit"
+                        ng-click="singIn()"
+                        ng-disabled="singInForm.$invalid">
+                    Sing in<i class="material-icons right">send</i>
+                </button>
+                <span ng-show="wrongCredentials" style="color: red;">Email or password are incorrect</span>
+            </div>            
+        </div>
+    </form>
+</div>

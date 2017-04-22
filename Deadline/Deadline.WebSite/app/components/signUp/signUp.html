@@ -10,7 +10,7 @@
                                type="email"
                                class="validate"
                                required
-                               ng-model="email"/>
+                               ng-model="email" />
                         <label for="signUpEmail">Email</label>
                     </div>
                     <div class="input-field col s12">
@@ -21,8 +21,11 @@
                                class="validate"
                                required
                                pattern=".{6,}"
-                               ng-model="password"/>
-                        <label for="signUpPassword" data-error="Password must have at least 6 characters long">Password</label>
+                               ng-model="password" />
+                        <label for="signUpPassword"
+                               data-error="Password must have at least 6 characters long">
+                            Password
+                        </label>
                     </div>
                     <div class="input-field col s12">
                         <input id="signUpPasswordConfirm"
@@ -31,25 +34,48 @@
                                type="password"
                                class="validate"
                                ng-model="passwordConfirm"
-                               equals-validation="{{password}}"/>
-                        <label for="signUpPasswordConfirm" data-error="Diffrent passwords">Confrim Password</label>
+                               equals-validation="{{password}}" />
+                        <label for="signUpPasswordConfirm"
+                               data-error="Diffrent passwords">
+                            Confrim Password
+                        </label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="signUpCompanyName" name="companyName" placeholder="Enter company name" type="text" class="validate" required ng-model="companyName"/>
+                        <input id="signUpCompanyName"
+                               name="companyName"
+                               placeholder="Enter company name"
+                               type="text"
+                               class="validate"
+                               required ng-model="companyName" />
                         <label for="signUpCompanyName">Company Name</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="signUpCompanyLogo" name="companyLogo" placeholder="Enter company logo" type="url" class="validate" required ng-model="companyLogo"/>
+                        <input id="signUpCompanyLogo"
+                               name="companyLogo"
+                               placeholder="Enter company logo"
+                               type="url"
+                               class="validate"
+                               required ng-model="companyLogo" />
                         <label for="signUpCompanyLogo">Company Logo</label>
                     </div>
                     <div class="col s12">
-                        <button class="btn waves-effect" type="submit" ng-click="submit()" ng-disabled="signUpForm.$invalid">Submit<i class="material-icons right">send</i></button>
+                        <button class="btn waves-effect"
+                                type="submit"
+                                ng-click="submit()"
+                                ng-disabled="signUpForm.$invalid">
+                            Submit<i class="material-icons right">send</i>
+                        </button>
+                        <div>
+                            <ul class="collection" ng-show="messages.length > 0">
+                                <li class="collection-item" ng-repeat="message in messages" style="color: red;">{{message}}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col s6">
-                <div class="row">
-                    <img alt="Company Logo" ng-show="companyLogo" ng-src="{{companyLogo}}"/>
+                <div class="col s6">
+                    <div class="row">
+                        <img alt="Company Logo" ng-show="companyLogo" ng-src="{{companyLogo}}" />
+                    </div>
                 </div>
             </div>
         </div>

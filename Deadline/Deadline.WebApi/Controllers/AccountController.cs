@@ -6,7 +6,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using System.Web.Http.Cors;
+using Deadline.WebApi.AbstractRepositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,33 +21,36 @@ using Deadline.WebApi.Results;
 namespace Deadline.WebApi.Controllers
 {
     [Authorize]
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private readonly IAspNetUsersRepository _aspNetUsersRepository;
+        private readonly ICompaniesRepository _companiesRepository;
 
-        public AccountController()
+        public AccountController(IAspNetUsersRepository aspNetUsersRepository, ICompaniesRepository companiesRepository)
         {
+            _aspNetUsersRepository = aspNetUsersRepository;
+            _companiesRepository = companiesRepository;
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
+            IAspNetUsersRepository aspNetUsersRepository,
+            ICompaniesRepository companiesRepository)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+            _aspNetUsersRepository = aspNetUsersRepository;
+            _companiesRepository = companiesRepository;
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -125,7 +129,7 @@ namespace Deadline.WebApi.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -167,8 +171,9 @@ namespace Deadline.WebApi.Controllers
             AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
 
             if (ticket == null || ticket.Identity == null || (ticket.Properties != null
-                && ticket.Properties.ExpiresUtc.HasValue
-                && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+                                                              && ticket.Properties.ExpiresUtc.HasValue
+                                                              && ticket.Properties.ExpiresUtc.Value <
+                                                              DateTimeOffset.UtcNow))
             {
                 return BadRequest("External login failure.");
             }
@@ -258,8 +263,8 @@ namespace Deadline.WebApi.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
@@ -328,7 +333,7 @@ namespace Deadline.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() {UserName = model.Email, Email = model.Email};
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -336,6 +341,14 @@ namespace Deadline.WebApi.Controllers
             {
                 return GetErrorResult(result);
             }
+
+            string aspNetUserId = await _aspNetUsersRepository.GetIdAsync(model.Email);
+            await _companiesRepository.AddAsync(new Companies
+            {
+                AspNetUserId = aspNetUserId,
+                LogoUrl = model.CompanyLogo,
+                Name = model.CompanyName
+            });
 
             return Ok();
         }
@@ -357,7 +370,7 @@ namespace Deadline.WebApi.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() {UserName = model.Email, Email = model.Email};
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -368,7 +381,7 @@ namespace Deadline.WebApi.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

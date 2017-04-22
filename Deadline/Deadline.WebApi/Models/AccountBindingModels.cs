@@ -49,8 +49,10 @@ namespace Deadline.WebApi.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
         public string CompanyName { get; set; }
 
+        [Required]
         public string CompanyLogo { get; set; }
     }
 

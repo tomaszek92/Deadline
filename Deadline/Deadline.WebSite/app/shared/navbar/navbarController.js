@@ -11,7 +11,11 @@ deadlineApp.controller("NavbarCtrl",
             for (let i = 0; i < $scope.tabs.length; i++) {
                 $scope.tabs[i].isActive = false;
             }
-            tab.isActive = true;
+            if (tab.title === "Log out") {
+                currentUser.clearProfile();
+            } else {
+                tab.isActive = true;
+            }
         }
         $scope.tabs = [
             {
@@ -31,6 +35,14 @@ deadlineApp.controller("NavbarCtrl",
                 isDivider: false
             },
             {
+                href: "#dashboard",
+                isSubHeader: false,
+                isActive: false,
+                title: "Dashboard",
+                visibleForLoggedUser: true,
+                isDivider: false
+            },
+            {
                 href: "#",
                 isSubHeader: true,
                 isActive: false,
@@ -40,7 +52,7 @@ deadlineApp.controller("NavbarCtrl",
                 isDivider: false
             },
             {
-                href: "#",
+                href: "#employeesHire",
                 isSubHeader: false,
                 isActive: false,
                 title: "Hire",
