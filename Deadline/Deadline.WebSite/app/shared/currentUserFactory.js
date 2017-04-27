@@ -12,7 +12,6 @@ deadlineApp.factory("currentUser",
 
         var setToken = function(token) {
             profile.token = token;
-
         }
 
         var setProfile = function(username, companyName, userId) {

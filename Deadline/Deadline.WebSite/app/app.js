@@ -28,5 +28,29 @@ var deadlineApp = angular
                 {
                     templateUrl: "app/components/employeesHire/employeesHire.html",
                     controller: "employeesHireCtrl"
+                })
+            .otherwise(
+                {
+                    redirectTo: "/dashboard"
                 });
+    })
+    .run(function($rootScope, $location, currentUser, navBar) {
+        $rootScope.$on("$locationChangeStart",
+            function (event, next) {
+                let urlTab = next.split("/").pop();
+                let activeTab = navBar.tabs.find(function (tab) {
+                    if (tab.href) {
+                        return urlTab === tab.href.substring(1);
+                    }
+                    return false;
+                });
+                if (activeTab != undefined) {
+                    navBar.tabClick(activeTab);
+                }
+                if (!currentUser.getProfile().isLoggedIn) {
+                    if (next.includes("dashboard")) {
+                        $location.path("/singIn");
+                    }
+                }
+            });
     });

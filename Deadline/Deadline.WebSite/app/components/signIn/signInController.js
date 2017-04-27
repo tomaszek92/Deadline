@@ -6,11 +6,9 @@ deadlineApp.controller("signInCtrl",
         $scope.password = "";
         $scope.wrongCredentials = false;
         $scope.singInDisable = false;
-        $scope.errorOccurred = false;
 
         $scope.singIn = function() {
             $scope.singInDisable = true;
-            $scope.errorOccurred = false;
 
             const loginRequestData = {
                 grant_type: "password",
@@ -29,22 +27,22 @@ deadlineApp.controller("signInCtrl",
                                     loginRequestData.userName,
                                     getCompanyResponse.name,
                                     getCompanyResponse.userId);
+                                $scope.wrongCredentials = false;
                                 $location.path("dashboard");
                             },
                             function(getCompanyResponseError) {
-                                $scope.errorOccurred = true;
+                                $scope.wrongCredentials = true;
                                 console.log(getCompanyResponseError);
                             }
                         );
                     },
                     function(loginResponseError) {
-                        $scope.errorOccurred = true;
+                        $scope.wrongCredentials = true;
                         console.log(loginResponseError);
                     })
                 .$promise.finally(function() {
                     $scope.email = "";
                     $scope.password = "";
-                    $scope.wrongCredentials = false;
                     $scope.singInDisable = false;
                 });
         }
