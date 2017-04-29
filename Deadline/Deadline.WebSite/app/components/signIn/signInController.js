@@ -1,7 +1,7 @@
 ﻿"use strict";
 
-deadlineApp.controller("signInCtrl",
-    function($scope, $location, userAccountResource, currentUser, companiesResource) {
+deadlineApp.controller("SignInCtrl",
+    function($scope, $location, userAccountResource, currentUserFactory, companiesResource) {
         $scope.email = "";
         $scope.password = "";
         $scope.wrongCredentials = false;
@@ -18,12 +18,12 @@ deadlineApp.controller("signInCtrl",
             userAccountResource.login
                 .loginUser(loginRequestData,
                     function(loginResponse) {
-                        currentUser.setToken(loginResponse.access_token);
+                        currentUserFactory.setToken(loginResponse.access_token);
 
                         companiesResource.get().byUserId(
                             { userId: loginResponse.userId },
                             function(getCompanyResponse) {
-                                currentUser.setProfile(
+                                currentUserFactory.setProfile(
                                     loginRequestData.userName,
                                     getCompanyResponse.name,
                                     getCompanyResponse.userId);

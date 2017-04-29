@@ -1,11 +1,10 @@
-﻿<div class="row" ng-controller="signInCtrl">
+﻿<div class="row" ng-controller="SignInCtrl">
     <form class="col s12" name="singInForm">
         <div class="row">
             <div class="input-field col s6">
                 <input id="signInEmail"
                        name="email"
                        type="email"
-                       placeholder="Enter email"
                        class="validate"
                        required
                        ng-model="email"/>
@@ -15,7 +14,6 @@
                 <input id="signInPassword"
                        name="password"
                        type="password"
-                       placeholder="Enter password"
                        class="validate"
                        required
                        pattern=".{6,}"

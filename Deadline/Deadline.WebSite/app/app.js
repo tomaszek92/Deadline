@@ -12,42 +12,42 @@ var deadlineApp = angular
             .when("/signUp",
                 {
                     templateUrl: "app/components/signUp/signUp.html",
-                    controller: "signUpCtrl"
+                    controller: "SignUpCtrl"
                 })
             .when("/singIn",
                 {
                     templateUrl: "app/components/signIn/signIn.html",
-                    controller: "signInCtrl"
+                    controller: "SignInCtrl"
                 })
             .when("/dashboard",
                 {
                     templateUrl: "app/components/dashboard/dashboard.html",
-                    controller: "dashboardCtrl"
+                    controller: "DashboardCtrl"
                 })
             .when("/employeesHire",
                 {
                     templateUrl: "app/components/employeesHire/employeesHire.html",
-                    controller: "employeesHireCtrl"
+                    controller: "EmployeesHireCtrl"
                 })
             .otherwise(
                 {
                     redirectTo: "/dashboard"
                 });
     })
-    .run(function($rootScope, $location, currentUser, navBar) {
+    .run(function($rootScope, $location, currentUserFactory, navbarFactory) {
         $rootScope.$on("$locationChangeStart",
-            function (event, next) {
+            function(event, next) {
                 let urlTab = next.split("/").pop();
-                let activeTab = navBar.tabs.find(function (tab) {
+                let activeTab = navbarFactory.tabs.find(function(tab) {
                     if (tab.href) {
                         return urlTab === tab.href.substring(1);
                     }
                     return false;
                 });
                 if (activeTab != undefined) {
-                    navBar.tabClick(activeTab);
+                    navbarFactory.tabClick(activeTab);
                 }
-                if (!currentUser.getProfile().isLoggedIn) {
+                if (!currentUserFactory.getProfile().isLoggedIn) {
                     if (next.includes("dashboard")) {
                         $location.path("/singIn");
                     }

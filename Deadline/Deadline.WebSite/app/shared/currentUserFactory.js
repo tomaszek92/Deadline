@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-deadlineApp.factory("currentUser",
+deadlineApp.factory("currentUserFactory",
     function() {
         var profile = {
             isLoggedIn: false,

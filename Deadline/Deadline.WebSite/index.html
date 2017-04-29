@@ -22,20 +22,21 @@
     <script src="app/shared/currentUserFactory.js"></script>
     <script src="app/shared/userAccountResource.js"></script>
     <script src="app/shared/companiesResource.js"></script>
-    <script src="app/shared/navBarFactory.js"></script>
+    <script src="app/shared/navbarFactory.js"></script>
 
     <!--controllers-->
-    <script src="app/shared/navbar/navbarController.js"></script>
-    <script src="app/components/signUp/signUpController.js"></script>
-    <script src="app/components/signIn/signInController.js"></script>
-    <script src="app/components/dashboard/dashboardController.js"></script>
-    <script src="app/components/employeesHire/employeesHireController.js"></script>
+    <script src="app/shared/navbar/NavbarController.js"></script>
+    <script src="app/components/signUp/SignUpController.js"></script>
+    <script src="app/components/signIn/SignInController.js"></script>
+    <script src="app/components/dashboard/DashboardController.js"></script>
+    <script src="app/components/employeesHire/EmployeesHireController.js"></script>
 </head>
 <body ng-app="deadline">
 <header>
     <nav ng-controller="NavbarCtrl" class="nav-extended">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">Deadline - {{pageTitle}}</a>
+            <a href="#" class="brand-logo center">Deadline</a>
+            <!--<a href="#" class="brand-logo center">Deadline - {{headerTabName}}</a>-->
             <a href="#" data-activates="sideNav" class="button-collapse">
                 <i class="material-icons">menu</i>
             </a>

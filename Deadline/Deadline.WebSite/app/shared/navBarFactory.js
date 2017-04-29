@@ -1,5 +1,5 @@
-﻿deadlineApp.factory("navBar",
-    function (currentUser) {
+﻿deadlineApp.factory("navbarFactory",
+    function (currentUserFactory) {
         var tabs = [
             {
                 href: "#singIn",
@@ -109,22 +109,23 @@
             }
         ];
 
-        var pageTitle;
+        var headerTabName;
 
-        var tabClick = function (tab) {
-            pageTitle = tab.title;
+        var tabClick = function(tab) {
+            headerTabName = tab.title;
+
             for (let i = 0; i < tabs.length; i++) {
                 tabs[i].isActive = false;
             }
             if (tab.title === "Log out") {
-                currentUser.clearProfile();
+                currentUserFactory.clearProfile();
             } else {
                 tab.isActive = true;
             }
         }
 
         return {
-            pageTitle: pageTitle,
+            headerTabName: headerTabName,
             tabClick: tabClick,
             tabs: tabs
         }

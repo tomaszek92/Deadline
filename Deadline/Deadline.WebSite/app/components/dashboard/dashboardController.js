@@ -1,4 +1,4 @@
-﻿deadlineApp.controller("dashboardCtrl",
+﻿deadlineApp.controller("DashboardCtrl",
     function($scope) {
 
     });

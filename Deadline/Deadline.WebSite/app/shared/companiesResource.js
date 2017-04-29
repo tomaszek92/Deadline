@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 deadlineApp.factory("companiesResource",
-    function($resource, appSettings, currentUser) {
+    function($resource, appSettings, currentUserFactory) {
         return {
             get: function() {
                 return $resource(
@@ -10,7 +10,7 @@ deadlineApp.factory("companiesResource",
                     {
                         byUserId: {
                             headers: {
-                                Authorization: "Bearer " + currentUser.getProfile().token
+                                Authorization: "Bearer " + currentUserFactory.getProfile().token
                             }
                         }
                     });

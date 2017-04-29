@@ -1,4 +1,4 @@
-﻿deadlineApp.controller("employeesHireCtrl",
+﻿deadlineApp.controller("EmployeesHireCtrl",
     function($scope) {
 
     });
