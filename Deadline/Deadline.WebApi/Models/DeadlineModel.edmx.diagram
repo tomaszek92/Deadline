@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a73429981d404948b0da26dd0c00f710" Name="Diagram1">
+      <Diagram DiagramId="a73429981d404948b0da26dd0c00f710" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="DeadlineDbModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="DeadlineDbModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DeadlineDbModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
@@ -14,6 +14,12 @@
         <AssociationConnector Association="DeadlineDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DeadlineDbModel.FK__Companies__AspNe__36B12243" ManuallyRouted="false" />
         <AssociationConnector Association="DeadlineDbModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DeadlineDbModel.Employees" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="DeadlineDbModel.EmployeesExperiences" Width="1.5" PointX="9.5" PointY="1.125" />
+        <EntityTypeShape EntityType="DeadlineDbModel.EmployeesTypes" Width="1.5" PointX="9.5" PointY="2.875" />
+        <AssociationConnector Association="DeadlineDbModel.FK_Employees_EmployeesExperiences" />
+        <AssociationConnector Association="DeadlineDbModel.FK_Employees_EmployeesTypes" />
+        <AssociationConnector Association="DeadlineDbModel.FK_Employees_Companies" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

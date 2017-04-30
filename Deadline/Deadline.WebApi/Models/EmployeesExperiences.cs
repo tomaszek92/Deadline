@@ -12,20 +12,17 @@ namespace Deadline.WebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Companies
+    public partial class EmployeesExperiences
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Companies()
+        public EmployeesExperiences()
         {
             this.Employees = new HashSet<Employees>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string LogoUrl { get; set; }
-        public string AspNetUserId { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees> Employees { get; set; }
     }
