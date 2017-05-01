@@ -1,4 +1,5 @@
 ﻿using Deadline.WebApi.Dtos.Companies;
+using Deadline.WebApi.Dtos.Employees;
 using Deadline.WebApi.Models;
 using ExpressMapper;
 
@@ -10,6 +11,8 @@ namespace Deadline.WebApi.App_Start
         {
             Mapper.Register<Companies, Company>()
                 .Member(dest => dest.UserId, src => src.AspNetUserId);
+
+            Mapper.Register<Employees, Employee>();
         }
     }
 }
