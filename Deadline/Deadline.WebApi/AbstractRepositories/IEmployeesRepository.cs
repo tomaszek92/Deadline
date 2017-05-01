@@ -8,5 +8,6 @@ namespace Deadline.WebApi.AbstractRepositories
     {
         Task<IEnumerable<Employees>> GetUnemployedAsync(GetUnemployedFilter filter);
         Task<int> GetUnemployedCountAsync(GetUnemployedFilter filter);
+        Task<bool> HireAsync(int employeeId, int companyId);
     }
 }

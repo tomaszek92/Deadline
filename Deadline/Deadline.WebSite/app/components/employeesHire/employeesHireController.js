@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 deadlineApp.controller("EmployeesHireCtrl",
-    function ($scope, employeesResource) {
+    function($scope, employeesResource) {
         $scope.types = {
             1: {
                 selected: true,
@@ -43,25 +43,42 @@ deadlineApp.controller("EmployeesHireCtrl",
         };
 
         $scope.search = function() {
-            alert("search");
+            $scope.pagination.activePage = 1;
+            getUnemployed();
         };
-
-        $scope.employeesToHire = employeesResource.get();
-
-        $scope.hire = function(employeeId) {
-            alert("EmployeeId: " + employeeId);
-        }
 
         $scope.pagination = {
-            change: function() {
-                alert("change");
+            change: function(move) {
+                this.activePage = this.activePage + move;
+                getUnemployed();
             },
-            set: function() {
-                alert("set");
+            set: function(page) {
+                this.activePage = page;
+                getUnemployed();
             },
-            pages: [1, 2, 3, 4, 5],
+            leftArrowDisabled: function() {
+                return this.activePage === 1;
+            },
+            rightArrowDisabled: function() {
+                return this.activePage === this.pages.last();
+            },
+            pages: [],
             activePage: 1
         };
+
+        getUnemployed();
+
+        $scope.hire = function(employeeId) {
+            employeesResource.hire(
+                { employeeId: employeeId },
+                function() {
+                    Materialize.toast("Your company hired new employee", 3000);
+                    getUnemployed();
+                },
+                function() {
+                    Materialize.toast("Something went wrong. Please try again.", 3000);
+                });
+        }
 
         function getSelectedIds(array) {
             const ids = [];
@@ -75,5 +92,25 @@ deadlineApp.controller("EmployeesHireCtrl",
 
         function isSelected(array) {
             return getSelectedIds(array).length > 0;
+        }
+
+        function getUnemployed() {
+            employeesResource.getUnemployed(
+                {
+                    typesIds: getSelectedIds($scope.types),
+                    experienceIds: getSelectedIds($scope.experiences),
+                    pageNumber: $scope.pagination.activePage
+                },
+                function(response) {
+                    $scope.employeesToHire = response.employees;
+                    $scope.pagination.pages = [];
+                    for (let i = 1; i <= response.pageNumbers; i++) {
+                        $scope.pagination.pages.push(i);
+                    }
+                },
+                function(response) {
+                    console.log(response);
+                    Materialize.toast("Cannot load employees. " + response.data.message, 10000);
+                });
         }
     });

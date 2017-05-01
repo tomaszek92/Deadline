@@ -42,7 +42,8 @@ deadlineApp.controller("SignUpCtrl",
                                         currentUserFactory.setProfile(
                                             loginRequestData.userName,
                                             getCompanyResponse.name,
-                                            getCompanyResponse.userId);
+                                            getCompanyResponse.userId,
+                                            getCompanyResponse.id);
                                         $location.path("dashboard");
                                     },
                                     function(getCompanyResponseError) {

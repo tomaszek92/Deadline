@@ -7,18 +7,21 @@ deadlineApp.factory("currentUserFactory",
             username: "",
             companyName: "",
             token: "",
-            userId: ""
+            userId: "",
+            companyId: -1
         };
 
         var setToken = function(token) {
             profile.token = token;
         }
 
-        var setProfile = function(username, companyName, userId) {
+        var setProfile = function(username, companyName, userId, companyId) {
             profile.username = username;
             profile.companyName = companyName;
             profile.isLoggedIn = true;
             profile.userId = userId;
+            console.log(companyId);
+            profile.companyId = companyId;
         };
 
         var getProfile = function() {

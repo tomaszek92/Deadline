@@ -1,27 +1,28 @@
-﻿<div class="row" ng-controller="EmployeesHireCtrl">
+﻿<div ng-controller="EmployeesHireCtrl">
     <div class="row">
-        <form class="col s12" name="searchCriteria"></form>
-        <div class="row">
-            <div class="input-field col s12 m4">
-                <h5>Type:</h5>
-                <div ng-repeat="(id, type) in types">
-                    <input id="type{{id}}" type="checkbox" ng-model="type.selected"/>
-                    <label for="type{{id}}">{{type.name}}</label>
+        <form class="col s12" name="searchCriteria">
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <h5>Type:</h5>
+                    <div ng-repeat="(id, type) in types">
+                        <input id="type{{id}}" type="checkbox" ng-model="type.selected"/>
+                        <label for="type{{id}}">{{type.name}}</label>
+                    </div>
+                </div>
+                <div class="input-field col s12 m4">
+                    <h5>Experience:</h5>
+                    <div ng-repeat="(id, experience) in experiences">
+                        <input id="experience{{id}}" type="checkbox" ng-model="experience.selected"/>
+                        <label for="experience{{id}}">{{experience.name}}</label>
+                    </div>
+                </div>
+                <div class="input-field col s12 m4">
+                    <button class="btn waves-effect" type="submit" ng-click="search()" ng-disabled="searchIsDisabled()">
+                        Search<i class="material-icons right">search</i>
+                    </button>
                 </div>
             </div>
-            <div class="input-field col s12 m4">
-                <h5>Experience:</h5>
-                <div ng-repeat="(id, experience) in experiences">
-                    <input id="experience{{id}}" type="checkbox" ng-model="experience.selected"/>
-                    <label for="experience{{id}}">{{experience.name}}</label>
-                </div>
-            </div>
-            <div class="input-field col s12 m4">
-                <button class="btn waves-effect" type="submit" ng-click="search()" ng-disabled="searchIsDisabled()">
-                    Search<i class="material-icons right">search</i>
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
     <div class="row">
         <div class="col s12">
@@ -52,16 +53,22 @@
             </table>
             <div class="center-align">
                 <ul class="pagination">
-                    <li class="disabled">
-                        <a href="" ng-click="pagination.change(-1)">
+                    <li class="waves-effect"
+                        ng-class="{'disabled': pagination.leftArrowDisabled()}"
+                        ng-disabled="pagination.leftArrowDisabled()">
+                        <a href="" ng-click="pagination.leftArrowDisabled() || pagination.change(-1)">
                             <i class="material-icons">chevron_left</i>
                         </a>
                     </li>
-                    <li ng-repeat="page in pagination.pages" ng-class="{'active': pagination.activePage === ($index + 1)}">
+                    <li class="waves-effect"
+                        ng-repeat="page in pagination.pages"
+                        ng-class="{'active': pagination.activePage === ($index + 1)}">
                         <a href="" ng-click="pagination.set(page)">{{page}}</a>
                     </li>
-                    <li class="waves-effect">
-                        <a href="" ng-click="pagination.change(1)">
+                    <li class="waves-effect"
+                        ng-class="{'disabled': pagination.rightArrowDisabled()}"
+                        ng-disabled="pagination.rightArrowDisabled()">
+                        <a href="" ng-click="pagination.rightArrowDisabled() || pagination.change(1)">
                             <i class="material-icons">chevron_right</i>
                         </a>
                     </li>

@@ -37,5 +37,20 @@ namespace Deadline.WebApi.Repositories
                     .CountAsync();
             }
         }
+
+        public async Task<bool> HireAsync(int employeeId, int companyId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                Employees dbEmployee = await db.Employees.SingleOrDefaultAsync(employee => employee.Id == employeeId);
+                if (dbEmployee == null)
+                {
+                    return false;
+                }
+                dbEmployee.CompanyId = companyId;
+                await db.SaveChangesAsync();
+                return true;
+            }
+        }
     }
 }

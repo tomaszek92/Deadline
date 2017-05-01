@@ -26,7 +26,8 @@ deadlineApp.controller("SignInCtrl",
                                 currentUserFactory.setProfile(
                                     loginRequestData.userName,
                                     getCompanyResponse.name,
-                                    getCompanyResponse.userId);
+                                    getCompanyResponse.userId,
+                                    getCompanyResponse.id);
                                 $scope.wrongCredentials = false;
                                 $location.path("dashboard");
                             },
