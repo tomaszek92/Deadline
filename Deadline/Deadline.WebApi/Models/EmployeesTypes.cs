@@ -18,6 +18,7 @@ namespace Deadline.WebApi.Models
         public EmployeesTypes()
         {
             this.Employees = new HashSet<Employees>();
+            this.ProjectsRequirements = new HashSet<ProjectsRequirements>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace Deadline.WebApi.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees> Employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectsRequirements> ProjectsRequirements { get; set; }
     }
 }

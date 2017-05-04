@@ -1,0 +1,48 @@
+﻿<div ng-controller="ProjectsSearchCtrl">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <h5>Rounds:</h5>
+                    <div no-ui-slider min="searchCriteria.roundsToFinish.min" max="searchCriteria.roundsToFinish.max"></div>
+                </div>
+                <div class="input-field col s12 m4">
+                    <button class="btn waves-effect" type="submit" ng-click="search()" ng-disabled="searchIsDisabled()">
+                        Search<i class="material-icons right">search</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <h5>Results:</h5>
+            <table class="highlight">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rounds to finish</th>
+                    <th class="center-align">Details</th>
+                    <th class="center-align">Take up</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="project in projects">
+                    <td>{{project.name}}</td>
+                    <td>{{project.roundsToFinish}}</td>
+                    <td class="center-align">
+                        <button class="btn waves-effect" ng-click="showDetails(project)">
+                            <i class="material-icons">info_outline</i>
+                        </button>
+                    </td>
+                    <td class="center-align">
+                        <button class="btn waves-effect" ng-click="takeUp(project.id)">
+                            <i class="material-icons">shopping_cart</i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

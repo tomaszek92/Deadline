@@ -75,6 +75,7 @@
           <Property Name="ExperienceId" Type="int" Nullable="false" />
           <Property Name="Salary" Type="money" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjectId" Type="int" />
         </EntityType>
         <EntityType Name="EmployeesExperiences">
           <Key>
@@ -82,6 +83,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductionCapacity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeesTypes">
           <Key>
@@ -89,6 +91,25 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="RoundsToFinish" Type="float" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectsRequirements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="int" Nullable="false" />
+          <Property Name="EmployeesNumber" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Companies__AspNe__49C3F6B7">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -194,6 +215,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employees_ToTable">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectsRequirements_EmployeesTypes">
+          <End Role="EmployeesTypes" Type="Self.EmployeesTypes" Multiplicity="1" />
+          <End Role="ProjectsRequirements" Type="Self.ProjectsRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeesTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectsRequirements">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectsRequirements_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectsRequirements" Type="Self.ProjectsRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectsRequirements">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DeadlineDbModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -204,6 +273,8 @@
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeesExperiences" EntityType="Self.EmployeesExperiences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeesTypes" EntityType="Self.EmployeesTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectsRequirements" EntityType="Self.ProjectsRequirements" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Companies__AspNe__49C3F6B7" Association="Self.FK__Companies__AspNe__49C3F6B7">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Companies" EntitySet="Companies" />
@@ -235,6 +306,22 @@
           <AssociationSet Name="FK_Employees_EmployeesTypes" Association="Self.FK_Employees_EmployeesTypes">
             <End Role="EmployeesTypes" EntitySet="EmployeesTypes" />
             <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_ToTable" Association="Self.FK_Employees_ToTable">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Companies" Association="Self.FK_Projects_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectsRequirements_EmployeesTypes" Association="Self.FK_ProjectsRequirements_EmployeesTypes">
+            <End Role="EmployeesTypes" EntitySet="EmployeesTypes" />
+            <End Role="ProjectsRequirements" EntitySet="ProjectsRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectsRequirements_Projects" Association="Self.FK_ProjectsRequirements_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectsRequirements" EntitySet="ProjectsRequirements" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -301,6 +388,7 @@
           <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Companies__AspNe__36B12243" FromRole="Companies" ToRole="AspNetUsers" />
           <NavigationProperty Name="Employees" Relationship="DeadlineDbModel.FK_Employees_Companies" FromRole="Companies" ToRole="Employees" />
+          <NavigationProperty Name="Projects" Relationship="DeadlineDbModel.FK_Projects_Companies" FromRole="Companies" ToRole="Projects" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -383,6 +471,24 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <EntitySet Name="Projects" EntityType="DeadlineDbModel.Projects" />
+          <EntitySet Name="ProjectsRequirements" EntityType="DeadlineDbModel.ProjectsRequirements" />
+          <AssociationSet Name="FK_Projects_Companies" Association="DeadlineDbModel.FK_Projects_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_ToTable" Association="DeadlineDbModel.FK_Employees_ToTable">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectsRequirements_EmployeesTypes" Association="DeadlineDbModel.FK_ProjectsRequirements_EmployeesTypes">
+            <End Role="EmployeesTypes" EntitySet="EmployeesTypes" />
+            <End Role="ProjectsRequirements" EntitySet="ProjectsRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectsRequirements_Projects" Association="DeadlineDbModel.FK_ProjectsRequirements_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectsRequirements" EntitySet="ProjectsRequirements" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Employees">
           <Key>
@@ -397,6 +503,8 @@
           <NavigationProperty Name="EmployeesExperiences" Relationship="DeadlineDbModel.FK_Employees_EmployeesExperiences" FromRole="Employees" ToRole="EmployeesExperiences" />
           <NavigationProperty Name="EmployeesTypes" Relationship="DeadlineDbModel.FK_Employees_EmployeesTypes" FromRole="Employees" ToRole="EmployeesTypes" />
           <NavigationProperty Name="Companies" Relationship="DeadlineDbModel.FK_Employees_Companies" FromRole="Employees" ToRole="Companies" />
+          <Property Name="ProjectId" Type="Int32" />
+          <NavigationProperty Name="Projects" Relationship="DeadlineDbModel.FK_Employees_ToTable" FromRole="Employees" ToRole="Projects" />
         </EntityType>
         <EntityType Name="EmployeesExperiences">
           <Key>
@@ -405,6 +513,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employees" Relationship="DeadlineDbModel.FK_Employees_EmployeesExperiences" FromRole="EmployeesExperiences" ToRole="Employees" />
+          <Property Name="ProductionCapacity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeesTypes">
           <Key>
@@ -413,6 +522,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employees" Relationship="DeadlineDbModel.FK_Employees_EmployeesTypes" FromRole="EmployeesTypes" ToRole="Employees" />
+          <NavigationProperty Name="ProjectsRequirements" Relationship="DeadlineDbModel.FK_ProjectsRequirements_EmployeesTypes" FromRole="EmployeesTypes" ToRole="ProjectsRequirements" />
         </EntityType>
         <Association Name="FK_Employees_EmployeesExperiences">
           <End Type="DeadlineDbModel.EmployeesExperiences" Role="EmployeesExperiences" Multiplicity="1" />
@@ -447,6 +557,78 @@
             </Principal>
             <Dependent Role="Employees">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoundsToFinish" Type="Double" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="Companies" Relationship="DeadlineDbModel.FK_Projects_Companies" FromRole="Projects" ToRole="Companies" />
+          <NavigationProperty Name="Employees" Relationship="DeadlineDbModel.FK_Employees_ToTable" FromRole="Projects" ToRole="Employees" />
+          <NavigationProperty Name="ProjectsRequirements" Relationship="DeadlineDbModel.FK_ProjectsRequirements_Projects" FromRole="Projects" ToRole="ProjectsRequirements" />
+        </EntityType>
+        <EntityType Name="ProjectsRequirements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeesNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployeesTypes" Relationship="DeadlineDbModel.FK_ProjectsRequirements_EmployeesTypes" FromRole="ProjectsRequirements" ToRole="EmployeesTypes" />
+          <NavigationProperty Name="Projects" Relationship="DeadlineDbModel.FK_ProjectsRequirements_Projects" FromRole="ProjectsRequirements" ToRole="Projects" />
+        </EntityType>
+        <Association Name="FK_Projects_Companies">
+          <End Type="DeadlineDbModel.Companies" Role="Companies" Multiplicity="0..1" />
+          <End Type="DeadlineDbModel.Projects" Role="Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_ToTable">
+          <End Type="DeadlineDbModel.Projects" Role="Projects" Multiplicity="0..1" />
+          <End Type="DeadlineDbModel.Employees" Role="Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectsRequirements_EmployeesTypes">
+          <End Type="DeadlineDbModel.EmployeesTypes" Role="EmployeesTypes" Multiplicity="1" />
+          <End Type="DeadlineDbModel.ProjectsRequirements" Role="ProjectsRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeesTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectsRequirements">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectsRequirements_Projects">
+          <End Type="DeadlineDbModel.Projects" Role="Projects" Multiplicity="1" />
+          <End Type="DeadlineDbModel.ProjectsRequirements" Role="ProjectsRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectsRequirements">
+              <PropertyRef Name="ProjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -522,6 +704,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DeadlineDbModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="ExperienceId" ColumnName="ExperienceId" />
@@ -534,6 +717,7 @@
           <EntitySetMapping Name="EmployeesExperiences">
             <EntityTypeMapping TypeName="DeadlineDbModel.EmployeesExperiences">
               <MappingFragment StoreEntitySet="EmployeesExperiences">
+                <ScalarProperty Name="ProductionCapacity" ColumnName="ProductionCapacity" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -543,6 +727,27 @@
             <EntityTypeMapping TypeName="DeadlineDbModel.EmployeesTypes">
               <MappingFragment StoreEntitySet="EmployeesTypes">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="DeadlineDbModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RoundsToFinish" ColumnName="RoundsToFinish" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectsRequirements">
+            <EntityTypeMapping TypeName="DeadlineDbModel.ProjectsRequirements">
+              <MappingFragment StoreEntitySet="ProjectsRequirements">
+                <ScalarProperty Name="EmployeesNumber" ColumnName="EmployeesNumber" />
+                <ScalarProperty Name="EmployeeTypeId" ColumnName="EmployeeTypeId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

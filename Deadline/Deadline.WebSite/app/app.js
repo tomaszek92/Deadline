@@ -29,6 +29,11 @@ var deadlineApp = angular
                     templateUrl: "app/components/employeesHire/employeesHire.html",
                     controller: "EmployeesHireCtrl"
                 })
+            .when("/projectsSearch",
+                {
+                    templateUrl: "app/components/projectsSearch/projectsSearch.html",
+                    controller: "ProjectsSearchCtrl"
+                })
             .otherwise(
                 {
                     redirectTo: "/dashboard"

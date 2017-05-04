@@ -212,9 +212,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\Projects\Project.cs" />
+    <Compile Include="Models\Filters\GetUnessignedProjectsFilter.cs" />
     <Compile Include="AbstractRepositories\IAspNetUsersRepository.cs" />
     <Compile Include="AbstractRepositories\ICompaniesRepository.cs" />
     <Compile Include="AbstractRepositories\IEmployeesRepository.cs" />
+    <Compile Include="AbstractRepositories\IProjectsRepository.cs" />
     <Compile Include="App_Start\AutofacContainerConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DeadlineDatabaseDataInitializer.cs" />
@@ -256,6 +259,7 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Dtos\Companies\Company.cs" />
     <Compile Include="Dtos\Employees\Employee.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,14 +306,24 @@
     <Compile Include="Models\EmployeesTypes.cs">
       <DependentUpon>DeadlineModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GetUnemployedFilter.cs" />
+    <Compile Include="Models\Filters\GetUnemployedFilter.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Filters\PageableFilter.cs" />
+    <Compile Include="Models\Projects.cs">
+      <DependentUpon>DeadlineModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectsRequirements.cs">
+      <DependentUpon>DeadlineModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Range.cs" />
     <Compile Include="Models\Responses\Employees\GetUnemployedResponse.cs" />
+    <Compile Include="Models\Responses\Projects\GetUnassignedProjectsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\AspNetUsersRepository.cs" />
     <Compile Include="Repositories\CompaniesRepository.cs" />
     <Compile Include="Repositories\EmployeesRepository.cs" />
+    <Compile Include="Repositories\ProjectsRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

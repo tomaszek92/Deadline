@@ -33,5 +33,7 @@ namespace Deadline.WebApi.Models
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<EmployeesExperiences> EmployeesExperiences { get; set; }
         public virtual DbSet<EmployeesTypes> EmployeesTypes { get; set; }
+        public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<ProjectsRequirements> ProjectsRequirements { get; set; }
     }
 }

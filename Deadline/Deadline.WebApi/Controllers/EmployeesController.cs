@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 using Deadline.WebApi.AbstractRepositories;
 using Deadline.WebApi.Dtos.Employees;
 using Deadline.WebApi.Models;
+using Deadline.WebApi.Models.Filters;
 using Deadline.WebApi.Models.Responses.Employees;
 using ExpressMapper.Extensions;
 

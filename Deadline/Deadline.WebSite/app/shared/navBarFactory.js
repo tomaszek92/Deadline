@@ -1,5 +1,5 @@
 ﻿deadlineApp.factory("navbarFactory",
-    function (currentUserFactory) {
+    function(currentUserFactory) {
         var tabs = [
             {
                 href: "#singIn",
@@ -64,7 +64,7 @@
                 isDivider: false
             },
             {
-                href: "#",
+                href: "#projectsSearch",
                 isSubHeader: false,
                 isActive: false,
                 title: "Search",

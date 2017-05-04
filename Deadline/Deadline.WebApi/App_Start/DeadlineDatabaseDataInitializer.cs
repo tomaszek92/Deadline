@@ -114,22 +114,53 @@ namespace Deadline.WebApi
         {
             using (var db = new DeadlineContext())
             {
-                List<Employees> employees = new List<Employees>();
-                Random rand = new Random();
-                foreach (string name in Names)
-                {
-                    int experienceId = rand.Next(1, 5);
-                    employees.Add(new Employees
-                    {
-                        Name = name,
-                        ExperienceId = experienceId,
-                        TypeId = rand.Next(1, 4),
-                        Salary = experienceId * rand.Next(100, 201)
-                    });
-                }
-                db.Employees.AddRange(employees);
-                db.SaveChanges();
+                //AddEmployees(db);
+                AddProjects(db);
             }
+        }
+
+        private static void AddEmployees(DeadlineContext db)
+        {
+            var employees = new List<Employees>();
+            var rand = new Random();
+            foreach (string name in Names)
+            {
+                int experienceId = rand.Next(1, 5);
+                employees.Add(new Employees
+                {
+                    Name = name,
+                    ExperienceId = experienceId,
+                    TypeId = rand.Next(1, 4),
+                    Salary = experienceId * rand.Next(100, 201)
+                });
+            }
+            db.Employees.AddRange(employees);
+            db.SaveChanges();
+        }
+
+        private static void AddProjects(DeadlineContext db)
+        {
+            var projects = new List<Projects>();
+            var rand = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                projects.Add(new Projects
+                {
+                    Name = $"Test Name{i}",
+                    Description = $"Test Description{i}",
+                    RoundsToFinish = rand.Next(10, 100),
+                    ProjectsRequirements = new List<ProjectsRequirements>()
+                    {
+                        new ProjectsRequirements
+                        {
+                            EmployeeTypeId = rand.Next(1, 4),
+                            EmployeesNumber = rand.Next(1, 10)
+                        }
+                    }
+                });
+            }
+            db.Projects.AddRange(projects);
+            db.SaveChanges();
         }
     }
 }

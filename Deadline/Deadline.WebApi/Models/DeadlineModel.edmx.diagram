@@ -20,6 +20,12 @@
         <AssociationConnector Association="DeadlineDbModel.FK_Employees_EmployeesExperiences" />
         <AssociationConnector Association="DeadlineDbModel.FK_Employees_EmployeesTypes" />
         <AssociationConnector Association="DeadlineDbModel.FK_Employees_Companies" />
+        <EntityTypeShape EntityType="DeadlineDbModel.Projects" Width="1.5" PointX="7.5" PointY="6.375" />
+        <EntityTypeShape EntityType="DeadlineDbModel.ProjectsRequirements" Width="1.5" PointX="11.75" PointY="4.875" />
+        <AssociationConnector Association="DeadlineDbModel.FK_Projects_Companies" />
+        <AssociationConnector Association="DeadlineDbModel.FK_Employees_ToTable" />
+        <AssociationConnector Association="DeadlineDbModel.FK_ProjectsRequirements_EmployeesTypes" />
+        <AssociationConnector Association="DeadlineDbModel.FK_ProjectsRequirements_Projects" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Deadline.WebApi.AbstractRepositories;
 using Deadline.WebApi.Models;
+using Deadline.WebApi.Models.Filters;
 
 namespace Deadline.WebApi.Repositories
 {
@@ -13,11 +14,7 @@ namespace Deadline.WebApi.Repositories
         {
             using (var db = new DeadlineContext())
             {
-                return await db.Employees
-                    .Where(employee =>
-                        employee.CompanyId == null &&
-                        filter.ExperienceIds.Contains(employee.ExperienceId) &&
-                        filter.TypesIds.Contains(employee.TypeId))
+                return await GetUnemployedQuery(db, filter)
                     .OrderBy(employee => employee.Id)
                     .Skip(filter.PageSize * (filter.PageNumber - 1))
                     .Take(filter.PageSize)
@@ -29,12 +26,7 @@ namespace Deadline.WebApi.Repositories
         {
             using (var db = new DeadlineContext())
             {
-                return await db.Employees
-                    .Where(employee =>
-                        employee.CompanyId == null &&
-                        filter.ExperienceIds.Contains(employee.ExperienceId) &&
-                        filter.TypesIds.Contains(employee.TypeId))
-                    .CountAsync();
+                return await GetUnemployedQuery(db, filter).CountAsync();
             }
         }
 
@@ -51,6 +43,14 @@ namespace Deadline.WebApi.Repositories
                 await db.SaveChangesAsync();
                 return true;
             }
+        }
+
+        private IQueryable<Employees> GetUnemployedQuery(DeadlineContext db, GetUnemployedFilter filter)
+        {
+            return db.Employees.Where(employee =>
+                employee.CompanyId == null &&
+                filter.ExperienceIds.Contains(employee.ExperienceId) &&
+                filter.TypesIds.Contains(employee.TypeId));
         }
     }
 }

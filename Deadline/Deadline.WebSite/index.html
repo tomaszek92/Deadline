@@ -4,13 +4,18 @@
     <title>Deadline- online game</title>
     <link rel="icon" type="image/png" href="icon.png"/>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="assets/css/materialize/css/materialize.min.css"/>
+
+    <link rel="stylesheet" href="assets/css/materialize/css/materialize.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="assets/css/noUiSlider/nouislider.css"/>
+
     <script src="assets/libs/angular/angular.min.js"></script>
     <script src="assets/libs/angular/angular-resource.min.js"></script>
     <script src="assets/libs/angular/angular-route.min.js"></script>
     <script src="assets/libs/jquery/jquery-3.2.0.min.js"></script>
     <script src="assets/libs/materialize/materialize.min.js"></script>
+    <script src="assets/libs/noUiSlider/nouislider.min.js"></script>
+    <script src="assets/libs/wNumb/wNumb.js"></script>
     <script src="assets/js/helpers.js"></script>
 
     <!--main-->
@@ -18,12 +23,15 @@
 
     <!--directives-->
     <script src="app/shared/directives/equalsValidation.js"></script>
+    <script src="app/shared/directives/noUiSlider.js"></script>
+    <script src="app/shared/directives/pagination/pagination.js"></script>
 
     <!--factories, services-->
     <script src="app/shared/currentUserFactory.js"></script>
     <script src="app/shared/resources/userAccountResource.js"></script>
     <script src="app/shared/resources/companiesResource.js"></script>
     <script src="app/shared/resources/employeesResource.js"></script>
+    <script src="app/shared/resources/projectsResource.js"></script>
     <script src="app/shared/navbarFactory.js"></script>
 
     <!--controllers-->
@@ -32,6 +40,7 @@
     <script src="app/components/signIn/SignInController.js"></script>
     <script src="app/components/dashboard/DashboardController.js"></script>
     <script src="app/components/employeesHire/EmployeesHireController.js"></script>
+    <script src="app/components/projectsSearch/ProjectsSearchController.js"></script>
 </head>
 <body ng-app="deadline">
 <header>
