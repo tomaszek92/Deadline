@@ -1,1 +1,21 @@
-﻿<div></div>
+﻿<ul class="pagination">
+    <li class="waves-effect"
+        ng-class="{'disabled': leftArrowDisabled()}"
+        ng-disabled="leftArrowDisabled()">
+        <a href="" ng-click="leftArrowDisabled() || change(-1)">
+            <i class="material-icons">chevron_left</i>
+        </a>
+    </li>
+    <li class="waves-effect"
+        ng-repeat="page in pages"
+        ng-class="{'active': activePage === ($index + 1)}">
+        <a href="" ng-click="set(page)">{{page}}</a>
+    </li>
+    <li class="waves-effect"
+        ng-class="{'disabled': rightArrowDisabled()}"
+        ng-disabled="rightArrowDisabled()">
+        <a href="" ng-click="rightArrowDisabled() || change(1)">
+            <i class="material-icons">chevron_right</i>
+        </a>
+    </li>
+</ul>

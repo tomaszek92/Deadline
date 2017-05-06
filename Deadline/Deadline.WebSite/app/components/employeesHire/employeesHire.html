@@ -52,28 +52,7 @@
                 </tbody>
             </table>
             <div class="center-align">
-                <ul class="pagination">
-                    <li class="waves-effect"
-                        ng-class="{'disabled': pagination.leftArrowDisabled()}"
-                        ng-disabled="pagination.leftArrowDisabled()">
-                        <a href="" ng-click="pagination.leftArrowDisabled() || pagination.change(-1)">
-                            <i class="material-icons">chevron_left</i>
-                        </a>
-                    </li>
-                    <li class="waves-effect"
-                        ng-repeat="page in pagination.pages"
-                        ng-class="{'active': pagination.activePage === ($index + 1)}">
-                        <a href="" ng-click="pagination.set(page)">{{page}}</a>
-                    </li>
-                    <li class="waves-effect"
-                        ng-class="{'disabled': pagination.rightArrowDisabled()}"
-                        ng-disabled="pagination.rightArrowDisabled()">
-                        <a href="" ng-click="pagination.rightArrowDisabled() || pagination.change(1)">
-                            <i class="material-icons">chevron_right</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <pagination get-data="getUnemployed()" active-page="pagination.activePage" pages="pagination.pages"/></div>
         </div>
     </div>
 </div>

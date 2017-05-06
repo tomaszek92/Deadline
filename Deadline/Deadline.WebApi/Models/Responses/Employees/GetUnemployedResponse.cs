@@ -3,9 +3,8 @@ using Deadline.WebApi.Dtos.Employees;
 
 namespace Deadline.WebApi.Models.Responses.Employees
 {
-    public class GetUnemployedResponse
+    public class GetUnemployedResponse : PagabableResponse
     {
         public IEnumerable<Employee> Employees { get; set; }
-        public int PageNumbers { get; set; }
     }
 }

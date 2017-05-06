@@ -42,28 +42,17 @@ deadlineApp.controller("EmployeesHireCtrl",
             return !experienceIsSelected || !typeIsSelected;
         };
 
-        $scope.search = function() {
-            $scope.pagination.activePage = 1;
-            getUnemployed();
-        };
-
         $scope.pagination = {
-            change: function(move) {
-                this.activePage = this.activePage + move;
-                getUnemployed();
-            },
-            set: function(page) {
-                this.activePage = page;
-                getUnemployed();
-            },
-            leftArrowDisabled: function() {
-                return this.activePage === 1;
-            },
-            rightArrowDisabled: function() {
-                return this.activePage === this.pages.last();
-            },
             pages: [],
             activePage: 1
+        };
+
+        $scope.search = function () {
+            getUnemployed();
+        };        
+
+        $scope.getUnemployed = function() {
+            getUnemployed($scope.pagination.activePage);
         };
 
         getUnemployed();
@@ -109,7 +98,6 @@ deadlineApp.controller("EmployeesHireCtrl",
                     }
                 },
                 function(response) {
-                    console.log(response);
                     Materialize.toast("Cannot load employees. " + response.data.message, 10000);
                 });
         }
