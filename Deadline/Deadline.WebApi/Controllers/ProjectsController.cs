@@ -46,15 +46,9 @@ namespace Deadline.WebApi.Controllers
             var response = new GetUnassignedProjectsResponse
             {
                 Projects = projects.Select(project => project.Map<Projects, Project>()),
-                PageNumbers = (int) Math.Ceiling((double) projectsMatchingToFilter / PageSize)
+                NumberOfPages = (int) Math.Ceiling((double) projectsMatchingToFilter / PageSize)
             };
             return Ok(response);
-        }
-
-        // GET: api/Projects/5
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST: api/Projects
@@ -64,11 +58,6 @@ namespace Deadline.WebApi.Controllers
 
         // PUT: api/Projects/5
         public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Projects/5
-        public void Delete(int id)
         {
         }
     }

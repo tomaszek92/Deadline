@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 deadlineApp.controller("ProjectsSearchCtrl",
-    function($scope, projectsResource) {
+    function($scope, projectsResource, paginationFactory) {
         $scope.searchCriteria = {
             roundsToFinish: {
                 min: 5,
@@ -9,22 +9,17 @@ deadlineApp.controller("ProjectsSearchCtrl",
             }
         };
 
-        $scope.search = function() {
-
-        };
+        $scope.pagination = paginationFactory.createEmptyPages();
 
         $scope.projects = [];
 
-        projectsResource
-            .getUnassigned(1, $scope.searchCriteria.roundsToFinish)
-            .then(
-                function(response) {
-                    $scope.projects = response.data.projects;
-                    console.log(response);
-                },
-                function(response) {
-                    console.log(response);
-                });
+        $scope.search = function() {
+            getUnassigned(1);
+        };
+
+        $scope.getUnassigned = function(activePage) {
+            getUnassigned(activePage);
+        }
 
         $scope.showDetails = function(project) {
             console.log(angular.toJson(project));
@@ -33,4 +28,19 @@ deadlineApp.controller("ProjectsSearchCtrl",
         $scope.takeUp = function(projectId) {
             console.log(projectId);
         };
+
+        getUnassigned(1);
+
+        function getUnassigned(activePage) {
+            projectsResource
+                .getUnassigned(activePage, $scope.searchCriteria.roundsToFinish)
+                .then(
+                    function(response) {
+                        $scope.projects = response.data.projects;
+                        paginationFactory.fillPages($scope.pagination.pages, response.data.numberOfPages);
+                    },
+                    function(response) {
+                        Materialize.toast("Cannot load projects. Please try again later.", 10000);
+                    });
+        }
     });

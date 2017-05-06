@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 deadlineApp.controller("EmployeesHireCtrl",
-    function($scope, employeesResource) {
+    function($scope, employeesResource, paginationFactory) {
         $scope.types = {
             1: {
                 selected: true,
@@ -42,27 +42,24 @@ deadlineApp.controller("EmployeesHireCtrl",
             return !experienceIsSelected || !typeIsSelected;
         };
 
-        $scope.pagination = {
-            pages: [],
-            activePage: 1
+        $scope.pagination = paginationFactory.createEmptyPages();
+
+        $scope.search = function() {
+            getUnemployed(1);
         };
 
-        $scope.search = function () {
-            getUnemployed();
-        };        
-
-        $scope.getUnemployed = function() {
-            getUnemployed($scope.pagination.activePage);
+        $scope.getUnemployed = function(activePage) {
+            getUnemployed(activePage);
         };
 
-        getUnemployed();
+        getUnemployed(1);
 
         $scope.hire = function(employeeId) {
             employeesResource.hire(
                 { employeeId: employeeId },
                 function() {
                     Materialize.toast("Your company hired new employee", 3000);
-                    getUnemployed();
+                    getUnemployed(1);
                 },
                 function() {
                     Materialize.toast("Something went wrong. Please try again.", 3000);
@@ -83,19 +80,16 @@ deadlineApp.controller("EmployeesHireCtrl",
             return getSelectedIds(array).length > 0;
         }
 
-        function getUnemployed() {
+        function getUnemployed(activePage) {
             employeesResource.getUnemployed(
                 {
                     typesIds: getSelectedIds($scope.types),
                     experienceIds: getSelectedIds($scope.experiences),
-                    pageNumber: $scope.pagination.activePage
+                    pageNumber: activePage
                 },
                 function(response) {
                     $scope.employeesToHire = response.employees;
-                    $scope.pagination.pages = [];
-                    for (let i = 1; i <= response.pageNumbers; i++) {
-                        $scope.pagination.pages.push(i);
-                    }
+                    paginationFactory.fillPages($scope.pagination.pages, response.numberOfPages);
                 },
                 function(response) {
                     Materialize.toast("Cannot load employees. " + response.data.message, 10000);

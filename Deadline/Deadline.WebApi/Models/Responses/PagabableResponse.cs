@@ -2,6 +2,6 @@
 {
     public class PagabableResponse
     {
-        public int PageNumbers { get; set; }
+        public int NumberOfPages { get; set; }
     }
 }

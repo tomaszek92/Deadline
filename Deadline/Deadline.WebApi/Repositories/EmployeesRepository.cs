@@ -45,7 +45,7 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
-        private IQueryable<Employees> GetUnemployedQuery(DeadlineContext db, GetUnemployedFilter filter)
+        private static IQueryable<Employees> GetUnemployedQuery(DeadlineContext db, GetUnemployedFilter filter)
         {
             return db.Employees.Where(employee =>
                 employee.CompanyId == null &&

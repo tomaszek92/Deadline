@@ -47,7 +47,7 @@ namespace Deadline.WebApi.Controllers
             var response = new GetUnemployedResponse
             {
                 Employees = employees.Select(e => e.Map<Employees, Employee>()),
-                PageNumbers = (int) Math.Ceiling((double) employeesMatchingToFilter / PageSize)
+                NumberOfPages = (int) Math.Ceiling((double) employeesMatchingToFilter / PageSize)
             };
             return Ok(response);
         }

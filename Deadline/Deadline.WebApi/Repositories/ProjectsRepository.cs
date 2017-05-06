@@ -30,7 +30,8 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
-        private IQueryable<Projects> GetUnassignedAsyncQuery(DeadlineContext db, GetUnessignedProjectsFilter filter)
+        private static IQueryable<Projects> GetUnassignedAsyncQuery(DeadlineContext db,
+            GetUnessignedProjectsFilter filter)
         {
             return db.Projects.Where(project =>
                 project.CompanyId == null &&
