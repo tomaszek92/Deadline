@@ -20,7 +20,6 @@ deadlineApp.factory("currentUserFactory",
             profile.companyName = companyName;
             profile.isLoggedIn = true;
             profile.userId = userId;
-            console.log(companyId);
             profile.companyId = companyId;
         };
 

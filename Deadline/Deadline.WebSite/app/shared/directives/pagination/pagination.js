@@ -8,15 +8,14 @@
             },
             templateUrl: "app/shared/directives/pagination/pagination.html",
             replace: true,
-            controller: function ($scope) {
+            controller: function($scope) {
                 $scope.activePage = 1;
-                $scope.change = function (move) {
+                $scope.change = function(move) {
                     $scope.activePage = $scope.activePage + move;
                     $scope.getData();
                 };
-                $scope.set = function (page) {
+                $scope.set = function(page) {
                     $scope.activePage = page;
-                    console.log($scope.activePage);
                     $scope.getData({ activePage: $scope.activePage });
                 };
                 $scope.leftArrowDisabled = function() {
