@@ -14,6 +14,7 @@ using ExpressMapper.Extensions;
 
 namespace Deadline.WebApi.Controllers
 {
+    [Authorize]
     [EnableCors("*", "*", "*")]
     public class ProjectsController : ApiController
     {
@@ -66,14 +67,15 @@ namespace Deadline.WebApi.Controllers
             return Ok(projectRequirements);
         }
 
-        // POST: api/Projects
-        public void Post([FromBody] string value)
+        [HttpPut]
+        public async Task<IHttpActionResult> TakeUp(int companyId, int projectId)
         {
-        }
-
-        // PUT: api/Projects/5
-        public void Put(int id, [FromBody] string value)
-        {
+            bool isSuccess = await _projectsRepository.TakeUpAsync(companyId, projectId);
+            if (!isSuccess)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
     }
 }

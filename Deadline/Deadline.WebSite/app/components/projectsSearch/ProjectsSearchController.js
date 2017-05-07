@@ -29,7 +29,6 @@ deadlineApp.controller("ProjectsSearchCtrl",
                 .getProjectRequirements(project.id)
                 .then(
                     function(response) {
-                        console.log(response);
                         $scope.actualProject.requirements = response.data;
                     },
                     function() {
@@ -38,7 +37,18 @@ deadlineApp.controller("ProjectsSearchCtrl",
         };
 
         $scope.takeUp = function(projectId) {
-            console.log(projectId);
+            projectsResource
+                .takeUp(projectId)
+                .then(
+                    function() {
+                        Materialize.toast("You have taken up a new project.", 10000);
+                    },
+                    function() {
+                        Materialize.toast("Cannot take up project. Please try again later.", 10000);
+                    })
+                .finally(function() {
+                    $scope.projects.removeById(projectId);
+                });
         };
 
         getUnassigned(1);

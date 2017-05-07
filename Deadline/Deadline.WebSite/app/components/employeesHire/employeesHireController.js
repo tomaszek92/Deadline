@@ -55,14 +55,17 @@ deadlineApp.controller("EmployeesHireCtrl",
         getUnemployed(1);
 
         $scope.hire = function(employeeId) {
-            employeesResource.hire(
-                { employeeId: employeeId },
-                function() {
-                    Materialize.toast("Your company hired new employee", 3000);
-                    getUnemployed(1);
-                },
-                function() {
-                    Materialize.toast("Something went wrong. Please try again.", 3000);
+            employeesResource
+                .hire(
+                    { employeeId: employeeId },
+                    function() {
+                        Materialize.toast("Your company hired new employee", 3000);
+                    },
+                    function() {
+                        Materialize.toast("Something went wrong. Please try again.", 3000);
+                    })
+                .$promise.finally(function() {
+                    $scope.employeesToHire.removeById(employeeId);
                 });
         }
 

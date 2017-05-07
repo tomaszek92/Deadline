@@ -28,6 +28,19 @@ deadlineApp.factory("projectsResource",
                             Authorization: "Bearer " + currentUserFactory.getProfile().token
                         }
                     });
+            },
+            takeUp: function(projectId) {
+                return $http({
+                    method: "PUT",
+                    url: appSettings.apiPath + "api/Projects/TakeUp",
+                    params: {
+                        companyId: currentUserFactory.getProfile().companyId,
+                        projectId: projectId
+                    },
+                    headers: {
+                        Authorization: "Bearer " + currentUserFactory.getProfile().token
+                    }
+                });
             }
         }
     });

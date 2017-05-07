@@ -30,6 +30,22 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
+        public async Task<bool> TakeUpAsync(int companyId, int projectId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                Projects dbProject = await db.Projects.SingleOrDefaultAsync(project => project.Id == projectId);
+                if (dbProject == null)
+                {
+                    return false;
+                }
+
+                dbProject.CompanyId = companyId;
+                await db.SaveChangesAsync();
+                return true;
+            }
+        }
+
         private static IQueryable<Projects> GetUnassignedAsyncQuery(DeadlineContext db,
             GetUnessignedProjectsFilter filter)
         {
