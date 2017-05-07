@@ -16,7 +16,7 @@
         <AssociationConnector Association="DeadlineDbModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DeadlineDbModel.Employees" Width="1.5" PointX="7.5" PointY="1.125" />
         <EntityTypeShape EntityType="DeadlineDbModel.EmployeesExperiences" Width="1.5" PointX="9.5" PointY="1.125" />
-        <EntityTypeShape EntityType="DeadlineDbModel.EmployeesTypes" Width="1.5" PointX="9.5" PointY="2.875" />
+        <EntityTypeShape EntityType="DeadlineDbModel.EmployeesTypes" Width="1.5" PointX="9.5" PointY="3.25" />
         <AssociationConnector Association="DeadlineDbModel.FK_Employees_EmployeesExperiences" />
         <AssociationConnector Association="DeadlineDbModel.FK_Employees_EmployeesTypes" />
         <AssociationConnector Association="DeadlineDbModel.FK_Employees_Companies" />

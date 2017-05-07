@@ -16,6 +16,18 @@ deadlineApp.factory("projectsResource",
                         Authorization: "Bearer " + currentUserFactory.getProfile().token
                     }
                 });
+            },
+            getProjectRequirements: function(projectId) {
+                return $http.get(
+                    appSettings.apiPath + "api/Projects/GetProjectRequirements",
+                    {
+                        params: {
+                            projectId: projectId
+                        },
+                        headers: {
+                            Authorization: "Bearer " + currentUserFactory.getProfile().token
+                        }
+                    });
             }
         }
     });

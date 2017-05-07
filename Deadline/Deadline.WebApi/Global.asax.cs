@@ -17,7 +17,7 @@ namespace Deadline.WebApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutofacContainerConfig.Register();
             MappingConfig.Register();
-            //DeadlineDatabaseDataInitializer.AddData();
+            DeadlineDatabaseDataInitializer.AddData();
         }
     }
 }

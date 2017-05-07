@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Deadline.WebApi.Helpers;
 using Deadline.WebApi.Models;
 
 namespace Deadline.WebApi
@@ -110,12 +111,16 @@ namespace Deadline.WebApi
             "Grover Stfleur"
         };
 
+        private static readonly string ProjectDesciption =
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non ullamcorper odio, et semper quam. Ut in ante vel dolor lacinia aliquam. Suspendisse potenti. Vestibulum iaculis volutpat nunc, viverra volutpat eros consectetur in. Fusce auctor elit tellus, in vulputate turpis varius et. Donec laoreet nulla at elit hendrerit, vitae suscipit urna pretium. Nunc sed semper sem. Suspendisse porta, eros in mattis hendrerit, risus turpis condimentum sapien, et suscipit mauris odio eget sem. Sed vitae felis tempus, rhoncus leo a, egestas ante. Ut ac tortor sodales, condimentum felis non, pretium felis. Maecenas pulvinar tortor euismod, pellentesque nulla non, tristique tellus. Aliquam hendrerit erat vitae purus pharetra, eget iaculis nulla varius. Fusce et est diam. Integer hendrerit cursus enim, tempor blandit metus fermentum ac. Curabitur tincidunt lobortis eros, non laoreet nunc tempor gravida."
+            ;
+
         public static void AddData()
         {
             using (var db = new DeadlineContext())
             {
                 //AddEmployees(db);
-                AddProjects(db);
+                //AddProjects(db);
             }
         }
 
@@ -144,16 +149,23 @@ namespace Deadline.WebApi
             var rand = new Random();
             for (int i = 0; i < 100; i++)
             {
+                var employeeTypeIds = new List<int> {1, 2, 3};
+
                 projects.Add(new Projects
                 {
                     Name = $"Test Name{i}",
-                    Description = $"Test Description{i}",
+                    Description = ProjectDesciption,
                     RoundsToFinish = rand.Next(10, 100),
-                    ProjectsRequirements = new List<ProjectsRequirements>()
+                    ProjectsRequirements = new List<ProjectsRequirements>
                     {
                         new ProjectsRequirements
                         {
-                            EmployeeTypeId = rand.Next(1, 4),
+                            EmployeeTypeId = employeeTypeIds.Pop(rand.Next(0, 3)),
+                            EmployeesNumber = rand.Next(1, 10)
+                        },
+                        new ProjectsRequirements
+                        {
+                            EmployeeTypeId = employeeTypeIds.Pop(rand.Next(0, 2)),
                             EmployeesNumber = rand.Next(1, 10)
                         }
                     }

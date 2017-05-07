@@ -31,7 +31,7 @@
                     <td>{{project.name}}</td>
                     <td>{{project.roundsToFinish}}</td>
                     <td class="center-align">
-                        <button class="btn waves-effect" ng-click="showDetails(project)">
+                        <button data-target="testModal" class="btn waves-effect" ng-click="showDetails(project)">
                             <i class="material-icons">info_outline</i>
                         </button>
                     </td>
@@ -44,8 +44,20 @@
                 </tbody>
             </table>
             <div class="col s12 center-align">
-                <pagination get-data="getUnassigned(activePage)" pages="pagination.pages" />
+                <pagination get-data="getUnassigned(activePage)" pages="pagination.pages"/>
             </div>
+        </div>
+    </div>
+
+    <div data-modal id="projectDetailsModal" class="modal">
+        <div class="modal-content">
+            <h4>{{actualProject.name}}</h4>
+            {{actualProject.description}}
+            <h5>Rounds to finish: <span style="font-weight: bold;">{{actualProject.roundsToFinish}}</span></h5>
+            <h5>Requirements</h5>
+            <ul class="collection">
+                <li ng-repeat="requirement in actualProject.requirements" class="collection-item">{{requirement.employeeTypeId | employeeType}}: {{requirement.employeesNumber}}</li>
+            </ul>
         </div>
     </div>
 </div>

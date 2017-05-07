@@ -18,6 +18,7 @@ namespace Deadline.WebApi
             builder.RegisterType<CompaniesRepository>().As<ICompaniesRepository>();
             builder.RegisterType<EmployeesRepository>().As<IEmployeesRepository>();
             builder.RegisterType<ProjectsRepository>().As<IProjectsRepository>();
+            builder.RegisterType<ProjectsRequirementsRepository>().As<IProjectsRequirementsRepository>();
 
             var container = builder.Build();
             var config = GlobalConfiguration.Configuration;

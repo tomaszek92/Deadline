@@ -18,11 +18,15 @@ namespace Deadline.WebApi.Controllers
     public class ProjectsController : ApiController
     {
         private readonly IProjectsRepository _projectsRepository;
+        private readonly IProjectsRequirementsRepository _projectsRequirementsRepository;
         private const int PageSize = 10;
 
-        public ProjectsController(IProjectsRepository projectsRepository)
+        public ProjectsController(
+            IProjectsRepository projectsRepository,
+            IProjectsRequirementsRepository projectsRequirementsRepository)
         {
             _projectsRepository = projectsRepository;
+            _projectsRequirementsRepository = projectsRequirementsRepository;
         }
 
 
@@ -49,6 +53,17 @@ namespace Deadline.WebApi.Controllers
                 NumberOfPages = (int) Math.Ceiling((double) projectsMatchingToFilter / PageSize)
             };
             return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetProjectRequirements(int projectId)
+        {
+            var dbProjectsRequirements = await _projectsRequirementsRepository.GetAsync(projectId);
+
+            var projectRequirements = dbProjectsRequirements
+                .Map<List<ProjectsRequirements>, List<ProjectRequirement>>();
+
+            return Ok(projectRequirements);
         }
 
         // POST: api/Projects

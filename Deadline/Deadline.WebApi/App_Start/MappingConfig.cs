@@ -16,6 +16,8 @@ namespace Deadline.WebApi.App_Start
             Mapper.Register<Employees, Employee>();
 
             Mapper.Register<Projects, Project>();
+
+            Mapper.Register<ProjectsRequirements, ProjectRequirement>();
         }
     }
 }

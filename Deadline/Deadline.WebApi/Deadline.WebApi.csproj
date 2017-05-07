@@ -212,7 +212,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractRepositories\IProjectsRequirementsRepository.cs" />
     <Compile Include="Dtos\Projects\Project.cs" />
+    <Compile Include="Dtos\Projects\ProjectRequirement.cs" />
+    <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Filters\GetUnessignedProjectsFilter.cs" />
     <Compile Include="AbstractRepositories\IAspNetUsersRepository.cs" />
     <Compile Include="AbstractRepositories\ICompaniesRepository.cs" />
@@ -325,6 +328,7 @@
     <Compile Include="Repositories\CompaniesRepository.cs" />
     <Compile Include="Repositories\EmployeesRepository.cs" />
     <Compile Include="Repositories\ProjectsRepository.cs" />
+    <Compile Include="Repositories\ProjectsRequirementsRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -22,7 +22,19 @@ deadlineApp.controller("ProjectsSearchCtrl",
         }
 
         $scope.showDetails = function(project) {
-            console.log(angular.toJson(project));
+            $scope.actualProject = project;
+            $("#projectDetailsModal").modal("open");
+
+            projectsResource
+                .getProjectRequirements(project.id)
+                .then(
+                    function(response) {
+                        console.log(response);
+                        $scope.actualProject.requirements = response.data;
+                    },
+                    function() {
+                        Materialize.toast("Cannot load project details. Please try again later.", 10000);
+                    });
         };
 
         $scope.takeUp = function(projectId) {
@@ -39,7 +51,7 @@ deadlineApp.controller("ProjectsSearchCtrl",
                         $scope.projects = response.data.projects;
                         paginationFactory.fillPages($scope.pagination.pages, response.data.numberOfPages);
                     },
-                    function(response) {
+                    function() {
                         Materialize.toast("Cannot load projects. Please try again later.", 10000);
                     });
         }
