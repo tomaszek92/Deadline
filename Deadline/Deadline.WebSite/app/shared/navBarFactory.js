@@ -43,10 +43,10 @@
                 isDivider: false
             },
             {
-                href: "#",
+                href: "#employeesManage",
                 isSubHeader: false,
                 isActive: false,
-                title: "Own",
+                title: "Manage",
                 visibleForLoggedUser: true,
                 isDivider: false
             },

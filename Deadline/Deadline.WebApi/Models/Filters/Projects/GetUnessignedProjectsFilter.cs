@@ -1,4 +1,4 @@
-﻿namespace Deadline.WebApi.Models.Filters
+﻿namespace Deadline.WebApi.Models.Filters.Projects
 {
     public class GetUnessignedProjectsFilter : PageableFilter
     {

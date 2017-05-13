@@ -1,0 +1,63 @@
+﻿<div ng-controller="EmployeesManageCtrl">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <div class="switch">
+                        Assigned:
+                        <label>
+                            No
+                            <input type="checkbox" ng-model="searchCriteria.assigned"/>
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                </div>
+                <div class="input-field col s12 m4">
+                    <button class="btn waves-effect" type="submit" ng-click="search()">
+                        Search<i class="material-icons right">search</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Experience</th>
+                    <th>Salary</th>
+                    <th class="center-align">Assign</th>
+                    <th class="center-align">Fire</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="employee in employees">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.typeId | employeeType}}</td>
+                    <td>{{employee.experienceId | employeeExperience}}</td>
+                    <td>{{employee.salary}}&#36;</td>
+                    <td>
+                        <select class="browser-default"
+                                ng-options="project.id as project.name for project in projects"
+                                ng-model="employee.projectId"
+                                ng-change="assign(employee)">
+                        </select>
+                    </td>
+                    <td class="center-align">
+                        <button class="btn waves-effect" ng-click="fire(employee.id)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="center-align">
+                <pagination get-data="getMy(activePage)" pages="pagination.pages"/>
+            </div>
+        </div>
+    </div>
+</div>

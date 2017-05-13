@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Deadline.WebApi.Models;
-using Deadline.WebApi.Models.Filters;
+using Deadline.WebApi.Models.Filters.Projects;
 
 namespace Deadline.WebApi.AbstractRepositories
 {
@@ -10,5 +10,6 @@ namespace Deadline.WebApi.AbstractRepositories
         Task<IEnumerable<Projects>> GetUnassignedAsync(GetUnessignedProjectsFilter filter);
         Task<int> GetUnassignedCountAsync(GetUnessignedProjectsFilter filter);
         Task<bool> TakeUpAsync(int companyId, int projectId);
+        Task<IEnumerable<Projects>> GetMyAsync(int companyId);
     }
 }

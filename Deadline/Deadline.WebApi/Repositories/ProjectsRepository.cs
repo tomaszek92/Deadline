@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Deadline.WebApi.AbstractRepositories;
 using Deadline.WebApi.Models;
-using Deadline.WebApi.Models.Filters;
+using Deadline.WebApi.Models.Filters.Projects;
 
 namespace Deadline.WebApi.Repositories
 {
@@ -43,6 +43,16 @@ namespace Deadline.WebApi.Repositories
                 dbProject.CompanyId = companyId;
                 await db.SaveChangesAsync();
                 return true;
+            }
+        }
+
+        public async Task<IEnumerable<Projects>> GetMyAsync(int companyId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                return await db.Projects
+                    .Where(project => project.CompanyId.HasValue && project.CompanyId.Value == companyId)
+                    .ToListAsync();
             }
         }
 

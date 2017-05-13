@@ -29,6 +29,11 @@ var deadlineApp = angular
                     templateUrl: "app/components/employeesHire/employeesHire.html",
                     controller: "EmployeesHireCtrl"
                 })
+            .when("/employeesManage",
+                {
+                    templateUrl: "app/components/employeesManage/employeesManage.html",
+                    controller: "EmployeesManageCtrl"
+                })
             .when("/projectsSearch",
                 {
                     templateUrl: "app/components/projectsSearch/projectsSearch.html",

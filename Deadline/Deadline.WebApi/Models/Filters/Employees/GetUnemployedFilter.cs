@@ -1,4 +1,4 @@
-﻿namespace Deadline.WebApi.Models.Filters
+﻿namespace Deadline.WebApi.Models.Filters.Employees
 {
     public class GetUnemployedFilter : PageableFilter
     {

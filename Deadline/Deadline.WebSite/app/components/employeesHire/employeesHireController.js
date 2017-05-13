@@ -59,7 +59,7 @@ deadlineApp.controller("EmployeesHireCtrl",
                 .hire(
                     { employeeId: employeeId },
                     function() {
-                        Materialize.toast("Your company hired new employee", 3000);
+                        Materialize.toast("Your company has hired new employee", 3000);
                     },
                     function() {
                         Materialize.toast("Something went wrong. Please try again.", 3000);
