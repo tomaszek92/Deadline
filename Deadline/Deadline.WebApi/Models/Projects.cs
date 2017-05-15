@@ -24,8 +24,9 @@ namespace Deadline.WebApi.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public double RoundsToFinish { get; set; }
+        public int RoundsToFinish { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public int Rounds { get; set; }
     
         public virtual Companies Companies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

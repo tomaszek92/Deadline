@@ -151,11 +151,13 @@ namespace Deadline.WebApi
             {
                 var employeeTypeIds = new List<int> {1, 2, 3};
 
+                int rounds = rand.Next(10, 100);
                 projects.Add(new Projects
                 {
                     Name = $"Test Name{i}",
                     Description = ProjectDesciption,
-                    RoundsToFinish = rand.Next(10, 100),
+                    Rounds = rounds,
+                    RoundsToFinish = rounds,
                     ProjectsRequirements = new List<ProjectsRequirements>
                     {
                         new ProjectsRequirements

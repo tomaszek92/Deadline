@@ -99,7 +99,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="RoundsToFinish" Type="float" Nullable="false" />
+          <Property Name="Rounds" Type="int" Nullable="false" />
+          <Property Name="RoundsToFinish" Type="int" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
         </EntityType>
         <EntityType Name="ProjectsRequirements">
@@ -567,11 +568,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RoundsToFinish" Type="Double" Nullable="false" />
+          <Property Name="RoundsToFinish" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="Companies" Relationship="DeadlineDbModel.FK_Projects_Companies" FromRole="Projects" ToRole="Companies" />
           <NavigationProperty Name="Employees" Relationship="DeadlineDbModel.FK_Employees_ToTable" FromRole="Projects" ToRole="Employees" />
           <NavigationProperty Name="ProjectsRequirements" Relationship="DeadlineDbModel.FK_ProjectsRequirements_Projects" FromRole="Projects" ToRole="ProjectsRequirements" />
+          <Property Name="Rounds" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ProjectsRequirements">
           <Key>
@@ -734,6 +736,7 @@
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="DeadlineDbModel.Projects">
               <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Rounds" ColumnName="Rounds" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="RoundsToFinish" ColumnName="RoundsToFinish" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

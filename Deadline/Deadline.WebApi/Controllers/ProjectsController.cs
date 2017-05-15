@@ -55,11 +55,12 @@ namespace Deadline.WebApi.Controllers
         }
 
         [HttpGet]
+        [ResponseType(typeof(IEnumerable<ProjectRequirement>))]
         public async Task<IHttpActionResult> GetProjectRequirements(int projectId)
         {
             var dbProjectsRequirements = await _projectsRequirementsRepository.GetAsync(projectId);
 
-            List<ProjectRequirement> projectRequirements = dbProjectsRequirements
+            IEnumerable<ProjectRequirement> projectRequirements = dbProjectsRequirements
                 .Map<List<ProjectsRequirements>, List<ProjectRequirement>>();
 
             return Ok(projectRequirements);
