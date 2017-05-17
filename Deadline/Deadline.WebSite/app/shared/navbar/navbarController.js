@@ -1,20 +1,15 @@
 ﻿"use strict";
 
 deadlineApp.controller("NavbarCtrl",
-    function($scope, currentUserFactory, navbarFactory, companiesResource) {
+    function ($scope, currentUserFactory, navbarFactory, companiesResource) {
+        currentUserFactory.registerObservator(function() {
+            $scope.accountBalance = currentUserFactory.getProfile().accountBalance;
+            $scope.leftRounds = currentUserFactory.getProfile().leftRounds;
+        });
+
         $scope.headerTabName = navbarFactory.headerTabName;
         $scope.tabClick = navbarFactory.tabClick;
         $scope.tabs = navbarFactory.tabs;
-        $scope.accountBalance = currentUserFactory.getProfile().accountBalance;
-        $scope.leftRounds = currentUserFactory.getProfile().leftRounds;
-
-        $scope.$watch(
-            function () {
-                return currentUserFactory.getProfile();
-            },
-            function(newValue, oldValue) {
-                console.log(newValue, oldValue);
-            });
 
         $scope.isLoggedIn = function() {
             return currentUserFactory.getProfile().isLoggedIn;
@@ -24,7 +19,7 @@ deadlineApp.controller("NavbarCtrl",
             companiesResource.actions().nextRound(
                 {},
                 function() {
-                    $scope.leftRounds--;
+                    currentUserFactory.substractOneRound();
                 },
                 function() {
                     Materialize.toast("Cannot make next round. Please try again later.", 10000);

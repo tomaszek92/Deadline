@@ -1,7 +1,20 @@
 ﻿"use strict";
 
 deadlineApp.factory("currentUserFactory",
-    function() {
+    function () {
+        var observators = [];
+
+        var registerObservator = function(callback) {
+            observators.push(callback);
+        }
+
+        var notifyObserbators = function() {
+            angular.forEach(observators,
+                function(observator) {
+                    observator();
+                });
+        }
+
         var profile = {
             isLoggedIn: false,
             username: "",
@@ -17,6 +30,16 @@ deadlineApp.factory("currentUserFactory",
             profile.token = token;
         }
 
+        var substractOneRound = function() {
+            profile.leftRounds--;
+            notifyObserbators();
+        }
+
+        var substractFromAccountBalance = function(moneyAmount) {
+            profile.accountBalance -= moneyAmount;
+            notifyObserbators();
+        }
+
         var setProfile = function(username, companyName, userId, companyId, accountBalance, leftRounds) {
             profile.username = username;
             profile.companyName = companyName;
@@ -25,6 +48,8 @@ deadlineApp.factory("currentUserFactory",
             profile.companyId = companyId;
             profile.accountBalance = accountBalance;
             profile.leftRounds = leftRounds;
+
+            notifyObserbators();
         };
 
         var getProfile = function() {
@@ -46,6 +71,9 @@ deadlineApp.factory("currentUserFactory",
             setToken: setToken,
             setProfile: setProfile,
             getProfile: getProfile,
-            clearProfile: clearProfile
-        };
-    });
+            clearProfile: clearProfile,
+            registerObservator: registerObservator,
+            substractOneRound: substractOneRound,
+            substractFromAccountBalance: substractFromAccountBalance
+    };
+});
