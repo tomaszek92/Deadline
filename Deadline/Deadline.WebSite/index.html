@@ -45,6 +45,7 @@
 
     <!--controllers-->
     <script src="app/shared/navbar/NavbarController.js"></script>
+    <script src="app/shared/footer/FooterController.js"></script>
     <script src="app/components/signUp/SignUpController.js"></script>
     <script src="app/components/signIn/SignInController.js"></script>
     <script src="app/components/dashboard/DashboardController.js"></script>
@@ -57,6 +58,16 @@
     <nav ng-controller="NavbarCtrl" class="nav-extended">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">Deadline</a>
+            <ul class="right" ng-if="isLoggedIn()">
+                <li>
+                    <div class="btn" style="cursor: default;">{{accountBalance}}&#36;</div>
+                </li>
+                <li>
+                    <a class="btn waves-effect" ng-click="nextRound()" ng-disabled="leftRounds === 0">
+                        Next round <span style="font-size: small;">(left rounds: {{leftRounds}})</span><i class="material-icons right">today</i>
+                    </a>
+                </li>
+            </ul>
             <!--<a href="#" class="brand-logo center">Deadline - {{headerTabName}}</a>-->
             <a href="#" data-activates="sideNav" class="button-collapse">
                 <i class="material-icons">menu</i>
@@ -82,7 +93,13 @@
         <div ng-view></div>
     </div>
 </main>
-<footer></footer>
+<footer ng-controller="FooterCtrl" class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            © {{actualYear}} Tomasz Tomczykiewicz
+        </div>
+    </div>
+</footer>
 
 <script>
     $(".button-collapse").sideNav();

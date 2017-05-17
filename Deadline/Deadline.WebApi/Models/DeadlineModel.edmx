@@ -63,6 +63,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="LogoUrl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccountBalance" Type="money" Nullable="false" />
+          <Property Name="LeftRounds" Type="int" Nullable="false" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Employees">
@@ -112,7 +114,7 @@
           <Property Name="EmployeeTypeId" Type="int" Nullable="false" />
           <Property Name="EmployeesNumber" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Companies__AspNe__49C3F6B7">
+        <Association Name="FK__Companies__AspNe__40058253">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
           <ReferentialConstraint>
@@ -276,7 +278,7 @@
           <EntitySet Name="EmployeesTypes" EntityType="Self.EmployeesTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectsRequirements" EntityType="Self.ProjectsRequirements" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Companies__AspNe__49C3F6B7" Association="Self.FK__Companies__AspNe__49C3F6B7">
+          <AssociationSet Name="FK__Companies__AspNe__40058253" Association="Self.FK__Companies__AspNe__40058253">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Companies" EntitySet="Companies" />
           </AssociationSet>
@@ -390,6 +392,8 @@
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Companies__AspNe__36B12243" FromRole="Companies" ToRole="AspNetUsers" />
           <NavigationProperty Name="Employees" Relationship="DeadlineDbModel.FK_Employees_Companies" FromRole="Companies" ToRole="Employees" />
           <NavigationProperty Name="Projects" Relationship="DeadlineDbModel.FK_Projects_Companies" FromRole="Companies" ToRole="Projects" />
+          <Property Name="AccountBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="LeftRounds" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -688,6 +692,8 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DeadlineDbModel.Companies">
               <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="LeftRounds" ColumnName="LeftRounds" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />

@@ -14,6 +14,20 @@ deadlineApp.factory("companiesResource",
                             }
                         }
                     });
+            },
+            actions: function() {
+                return $resource(
+                    appSettings.apiPath + "api/companies/",
+                    { companyId: currentUserFactory.getProfile().companyId },
+                    {
+                        nextRound: {
+                            url: appSettings.apiPath + "api/companies/nextRound/:companyId/",
+                            headers: {
+                                Authorization: "Bearer " + currentUserFactory.getProfile().token
+                            },
+                            method: "PUT"
+                        }
+                    });
             }
         };
     });

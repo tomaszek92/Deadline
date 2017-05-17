@@ -43,7 +43,9 @@ deadlineApp.controller("SignUpCtrl",
                                             loginRequestData.userName,
                                             getCompanyResponse.name,
                                             getCompanyResponse.userId,
-                                            getCompanyResponse.id);
+                                            getCompanyResponse.id,
+                                            getCompanyResponse.accountBalance,
+                                            getCompanyResponse.leftRounds);
                                         $location.path("dashboard");
                                     },
                                     function(getCompanyResponseError) {

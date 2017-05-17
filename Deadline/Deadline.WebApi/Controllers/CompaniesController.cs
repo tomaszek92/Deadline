@@ -27,13 +27,20 @@ namespace Deadline.WebApi.Controllers
         public async Task<IHttpActionResult> GetByUserId(string userId)
         {
             Guid userIdGuid = Guid.Parse(userId);
-            var company = await _companiesRepository.GetAsync(userIdGuid);
-            if (company == null)
+            Companies dbCompany = await _companiesRepository.GetAsync(userIdGuid);
+            if (dbCompany == null)
             {
                 return NotFound();
             }
-            Company map = company.Map<Companies, Company>();
-            return Ok(map);
+            Company company = dbCompany.Map<Companies, Company>();
+            return Ok(company);
+        }
+
+        [HttpPut]
+        [Route("api/companies/nextRound/{companyId}")]
+        public async Task<IHttpActionResult> NextRound(int companyId)
+        {
+            return Ok();
         }
     }
 }

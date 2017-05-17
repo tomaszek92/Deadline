@@ -27,7 +27,9 @@ deadlineApp.controller("SignInCtrl",
                                     loginRequestData.userName,
                                     getCompanyResponse.name,
                                     getCompanyResponse.userId,
-                                    getCompanyResponse.id);
+                                    getCompanyResponse.id,
+                                    getCompanyResponse.accountBalance,
+                                    getCompanyResponse.leftRounds);
                                 $scope.wrongCredentials = false;
                                 $location.path("dashboard");
                             },

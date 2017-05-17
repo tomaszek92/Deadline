@@ -25,6 +25,8 @@ namespace Deadline.WebApi.Models
         public string Name { get; set; }
         public string LogoUrl { get; set; }
         public string AspNetUserId { get; set; }
+        public decimal AccountBalance { get; set; }
+        public int LeftRounds { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
