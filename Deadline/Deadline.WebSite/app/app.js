@@ -6,7 +6,9 @@ var deadlineApp = angular
         {
             apiPath: "http://localhost:59590/"
         })
-    .config(function($routeProvider, $locationProvider) {
+    .config(function($routeProvider, $locationProvider, $httpProvider) {
+        $httpProvider.interceptors.push("loaderInterceptor");
+
         $locationProvider.hashPrefix("");
         $routeProvider
             .when("/signUp",
@@ -43,6 +45,8 @@ var deadlineApp = angular
                 {
                     redirectTo: "/dashboard"
                 });
+
+
     })
     .run(function($rootScope, $location, currentUserFactory, navbarFactory) {
         $rootScope.$on("$locationChangeStart",

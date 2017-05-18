@@ -1,10 +1,15 @@
 ﻿"use strict";
 
 deadlineApp.controller("NavbarCtrl",
-    function ($scope, currentUserFactory, navbarFactory, companiesResource) {
+    function ($scope, currentUserFactory, navbarFactory, companiesResource, loaderFactory) {
+
         currentUserFactory.registerObservator(function() {
             $scope.accountBalance = currentUserFactory.getProfile().accountBalance;
             $scope.leftRounds = currentUserFactory.getProfile().leftRounds;
+        });
+
+        loaderFactory.registerObservator(function() {
+            $scope.webApiCallCount = loaderFactory.getWebApiCallCount();
         });
 
         $scope.headerTabName = navbarFactory.headerTabName;

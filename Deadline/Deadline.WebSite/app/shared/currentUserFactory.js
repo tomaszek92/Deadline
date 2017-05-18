@@ -8,7 +8,7 @@ deadlineApp.factory("currentUserFactory",
             observators.push(callback);
         }
 
-        var notifyObserbators = function() {
+        var notifyObservators = function() {
             angular.forEach(observators,
                 function(observator) {
                     observator();
@@ -32,12 +32,12 @@ deadlineApp.factory("currentUserFactory",
 
         var substractOneRound = function() {
             profile.leftRounds--;
-            notifyObserbators();
+            notifyObservators();
         }
 
         var substractFromAccountBalance = function(moneyAmount) {
             profile.accountBalance -= moneyAmount;
-            notifyObserbators();
+            notifyObservators();
         }
 
         var setProfile = function(username, companyName, userId, companyId, accountBalance, leftRounds) {
@@ -49,7 +49,7 @@ deadlineApp.factory("currentUserFactory",
             profile.accountBalance = accountBalance;
             profile.leftRounds = leftRounds;
 
-            notifyObserbators();
+            notifyObservators();
         };
 
         var getProfile = function() {

@@ -42,6 +42,8 @@
     <script src="app/shared/resources/projectsResource.js"></script>
     <script src="app/shared/navbarFactory.js"></script>
     <script src="app/shared/paginationFactory.js"></script>
+    <script src="app/shared/loader/loaderInterceptor.js"></script>
+    <script src="app/shared/loader/loaderFactory.js"></script>
 
     <!--controllers-->
     <script src="app/shared/navbar/NavbarController.js"></script>
@@ -72,6 +74,9 @@
             <a href="#" data-activates="sideNav" class="button-collapse">
                 <i class="material-icons">menu</i>
             </a>
+        </div>
+        <div ng-show="webApiCallCount > 0" class="progress">
+            <div class="indeterminate"></div>
         </div>
         <ul id="sideNav" class="side-nav fixed">
             <li ng-repeat="tab in tabs"
