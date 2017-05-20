@@ -213,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractRepositories\IProjectsRequirementsRepository.cs" />
+    <Compile Include="Controllers\RankingsController.cs" />
     <Compile Include="Dtos\Employees\EmployeeWithProject.cs" />
     <Compile Include="Dtos\Projects\Project.cs" />
     <Compile Include="Dtos\Projects\ProjectRequirement.cs" />
@@ -321,10 +322,13 @@
       <DependentUpon>DeadlineModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Range.cs" />
+    <Compile Include="Models\RankingPeriod.cs" />
+    <Compile Include="Models\Responses\Employees\GetMyAmountResponse.cs" />
     <Compile Include="Models\Responses\Employees\GetMyEmployeesResponse.cs" />
     <Compile Include="Models\Responses\Employees\GetUnemployedResponse.cs" />
     <Compile Include="Models\Responses\PagabableResponse.cs" />
     <Compile Include="Models\Responses\Projects\GetUnassignedProjectsResponse.cs" />
+    <Compile Include="Models\Responses\Rankings\GetPositionResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\AspNetUsersRepository.cs" />

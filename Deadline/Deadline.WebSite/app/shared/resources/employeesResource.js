@@ -20,6 +20,11 @@ deadlineApp.factory("employeesResource",
                         Authorization: "Bearer " + currentUserFactory.getProfile().token
                     }
                 },
+                getMyAmount: {
+                    headers: {
+                        Authorization: "Bearer " + currentUserFactory.getProfile().token
+                    }
+                },
                 hire: {
                     url: appSettings.apiPath + "api/employees/:companyId/hires/:employeeId",
                     headers: {

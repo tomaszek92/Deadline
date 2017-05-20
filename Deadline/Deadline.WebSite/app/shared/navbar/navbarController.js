@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 deadlineApp.controller("NavbarCtrl",
-    function ($scope, currentUserFactory, navbarFactory, companiesResource, loaderFactory) {
+    function($scope, currentUserFactory, navbarFactory, companiesResource, loaderFactory) {
 
         currentUserFactory.registerObservator(function() {
             $scope.accountBalance = currentUserFactory.getProfile().accountBalance;

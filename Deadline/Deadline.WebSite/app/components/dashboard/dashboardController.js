@@ -1,7 +1,32 @@
 ﻿deadlineApp.controller("DashboardCtrl",
-    function($scope, projectsResource) {
+    function ($scope, projectsResource, rankingsResource, employeesResource, currentUserFactory) {
 
         $scope.projectChartOption = {};
+        $scope.positionInRanking = 0;
+        $scope.companyName = currentUserFactory.getProfile().companyName;
+        $scope.employeesAmount = 0;
+
+        rankingsResource
+            .getPosition({
+                    rankingPeriod: RankingPeriod.All
+                },
+                function(response) {
+                    $scope.positionInRanking = response.position;
+                },
+                function() {
+                    showErrotToast("Cannot load position in ranking.");
+                });
+
+        employeesResource
+            .getMyAmount(
+                {},
+                function(response) {
+                    $scope.employeesAmount = response.amount;
+                },
+                function () {
+                    showErrotToast("Cannot load employees amount.");
+            });
+
 
         projectsResource
             .getMy()
@@ -21,7 +46,7 @@
                         createProjectChartOption(xAxisCategories, roundsToFinishSeriesData, roundsCompletedSeriesData);
                 },
                 function() {
-                    Materialize.toast("Cannot load project details. Please try again later.", 10000);
+                    showErrotToast("Cannot load project details.");
                 });
 
         function createProjectChartOption(xAxisCategories, roundsToFinishSeriesData, roundsCompletedSeriesData) {

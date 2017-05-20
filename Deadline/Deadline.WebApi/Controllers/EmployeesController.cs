@@ -72,6 +72,18 @@ namespace Deadline.WebApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(GetMyAmountResponse))]
+        public async Task<IHttpActionResult> GetMyAmount(int companyId)
+        {
+            int amount = await _employeesRepository.GetMyAmountAsync(companyId);
+            var response = new GetMyAmountResponse
+            {
+                Amount = amount
+            };
+            return Ok(response);
+        }
+
         [HttpPut]
         [Route("api/employees/{companyId}/hires/{employeeId}")]
         public async Task<IHttpActionResult> Hire(int employeeId, int companyId)

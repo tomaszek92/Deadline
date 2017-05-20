@@ -1,6 +1,9 @@
 ﻿<div ng-controller="DashboardCtrl">
     <div class="row">
         <div class="col s12">
+                <h5>{{companyName}}</h5>
+                <h6>Emplyees: <span style="font-size: small;">{{employeesAmount}}</span></h6>
+                <h6>Position in ranking: <span style="font-size: small;">{{positionInRanking}}</span></h6>
             <h5>Projects in progress</h5>
             <highchart options="{{projectChartOption}}"/>
         </div>

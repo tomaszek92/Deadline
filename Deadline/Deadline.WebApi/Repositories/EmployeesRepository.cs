@@ -94,6 +94,17 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
+        public async Task<int> GetMyAmountAsync(int companyId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                return await db.Employees
+                    .CountAsync(employee =>
+                        employee.CompanyId.HasValue &&
+                        employee.CompanyId.Value == companyId);
+            }
+        }
+
         private static IQueryable<Employees> GetUnemployedQuery(DeadlineContext db, GetUnemployedFilter filter)
         {
             return db.Employees.Where(employee =>

@@ -14,5 +14,6 @@ namespace Deadline.WebApi.AbstractRepositories
         Task<int> GetMyCountAsync(int companyId, GetMyEmployeesFilter filter);
         Task<bool> AssignAsync(int companyId, int employeeId, int projectId);
         Task<bool> FireAsync(int companyId, int employeeId);
+        Task<int> GetMyAmountAsync(int companyId);
     }
 }
