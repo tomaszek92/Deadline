@@ -105,6 +105,18 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
+        public async Task<IEnumerable<Employees>> GetAssignedToProjectAsync(int projectId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                return await db.Employees
+                    .Where(employee =>
+                        employee.ProjectId.HasValue &&
+                        employee.ProjectId.Value == projectId)
+                    .ToListAsync();
+            }
+        }
+
         private static IQueryable<Employees> GetUnemployedQuery(DeadlineContext db, GetUnemployedFilter filter)
         {
             return db.Employees.Where(employee =>

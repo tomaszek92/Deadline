@@ -11,16 +11,19 @@ deadlineApp.factory("employeesResource",
             },
             {
                 getUnemployed: {
+                    url: appSettings.apiPath + "api/employees/unemployeed",
                     headers: {
                         Authorization: "Bearer " + currentUserFactory.getProfile().token
                     }
                 },
                 getMy: {
+                    url: appSettings.apiPath + "api/employees/:companyId/:assigned/:pageNumber",
                     headers: {
                         Authorization: "Bearer " + currentUserFactory.getProfile().token
                     }
                 },
                 getMyAmount: {
+                    url: appSettings.apiPath + "api/employees/:companyId/amount",
                     headers: {
                         Authorization: "Bearer " + currentUserFactory.getProfile().token
                     }

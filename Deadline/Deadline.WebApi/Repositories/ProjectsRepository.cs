@@ -46,6 +46,22 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
+        public async Task<bool> TurnDownAsync(int companyId, int projectId)
+        {
+            using (var db = new DeadlineContext())
+            {
+                Projects dbProject = await db.Projects.SingleOrDefaultAsync(project => project.Id == projectId);
+                if (dbProject?.CompanyId == null || dbProject.CompanyId.Value != companyId)
+                {
+                    return false;
+                }
+
+                dbProject.CompanyId = null;
+                await db.SaveChangesAsync();
+                return true;
+            }
+        }
+
         public async Task<IEnumerable<Projects>> GetMyAsync(int companyId)
         {
             using (var db = new DeadlineContext())
@@ -56,6 +72,26 @@ namespace Deadline.WebApi.Repositories
             }
         }
 
+        public async Task<IEnumerable<Projects>> GetMyAsync(GetMyProjectsFilter filter)
+        {
+            using (var db = new DeadlineContext())
+            {
+                return await GetMyProjectsQuery(db, filter)
+                    .OrderBy(project => project.Id)
+                    .Skip(filter.PageSize * (filter.PageNumber - 1))
+                    .Take(filter.PageSize)
+                    .ToListAsync();
+            }
+        }
+
+        public async Task<int> GetMyCountAsync(GetMyProjectsFilter filter)
+        {
+            using (var db = new DeadlineContext())
+            {
+                return await GetMyProjectsQuery(db, filter).CountAsync();
+            }
+        }
+
         private static IQueryable<Projects> GetUnassignedAsyncQuery(DeadlineContext db,
             GetUnessignedProjectsFilter filter)
         {
@@ -63,6 +99,12 @@ namespace Deadline.WebApi.Repositories
                 project.CompanyId == null &&
                 filter.RoundsToFinish.From <= project.RoundsToFinish &&
                 project.RoundsToFinish <= filter.RoundsToFinish.To);
+        }
+
+        private static IQueryable<Projects> GetMyProjectsQuery(DeadlineContext db, GetMyProjectsFilter filter)
+        {
+            return db.Projects
+                .Where(project => project.CompanyId.HasValue && project.CompanyId.Value == filter.CompanyId);
         }
     }
 }

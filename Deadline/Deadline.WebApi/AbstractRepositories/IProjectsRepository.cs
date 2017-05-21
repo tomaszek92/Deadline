@@ -10,6 +10,9 @@ namespace Deadline.WebApi.AbstractRepositories
         Task<IEnumerable<Projects>> GetUnassignedAsync(GetUnessignedProjectsFilter filter);
         Task<int> GetUnassignedCountAsync(GetUnessignedProjectsFilter filter);
         Task<bool> TakeUpAsync(int companyId, int projectId);
+        Task<bool> TurnDownAsync(int companyId, int projectId);
         Task<IEnumerable<Projects>> GetMyAsync(int companyId);
+        Task<IEnumerable<Projects>> GetMyAsync(GetMyProjectsFilter filter);
+        Task<int> GetMyCountAsync(GetMyProjectsFilter filter);
     }
 }

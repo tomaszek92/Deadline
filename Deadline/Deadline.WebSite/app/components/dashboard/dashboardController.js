@@ -14,7 +14,7 @@
                     $scope.positionInRanking = response.position;
                 },
                 function() {
-                    showErrotToast("Cannot load position in ranking.");
+                    showToast("Cannot load position in ranking.");
                 });
 
         employeesResource
@@ -24,7 +24,7 @@
                     $scope.employeesAmount = response.amount;
                 },
                 function () {
-                    showErrotToast("Cannot load employees amount.");
+                    showToast("Cannot load employees amount.");
             });
 
 
@@ -46,7 +46,7 @@
                         createProjectChartOption(xAxisCategories, roundsToFinishSeriesData, roundsCompletedSeriesData);
                 },
                 function() {
-                    showErrotToast("Cannot load project details.");
+                    showToast("Cannot load project details.");
                 });
 
         function createProjectChartOption(xAxisCategories, roundsToFinishSeriesData, roundsCompletedSeriesData) {

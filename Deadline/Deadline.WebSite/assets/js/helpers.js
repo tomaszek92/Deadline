@@ -11,6 +11,6 @@ Array.prototype.removeById = function(id) {
     }
 }
 
-function showErrotToast(msg) {
+function showToast(msg) {
     Materialize.toast(msg + " Please try again later.", 10000);
 }

@@ -27,6 +27,7 @@ namespace Deadline.WebApi.Controllers
 
         [HttpGet]
         [ResponseType(typeof(GetUnemployedResponse))]
+        [Route("api/employees/unemployeed")]
         public async Task<IHttpActionResult> GetUnemployed(
             [FromUri] int[] typesIds,
             [FromUri] int[] experienceIds,
@@ -52,6 +53,7 @@ namespace Deadline.WebApi.Controllers
 
         [HttpGet]
         [ResponseType(typeof(GetMyEmployeesResponse))]
+        [Route("api/employees/{companyId}/{assigned}/{pageNumber}")]
         public async Task<IHttpActionResult> GetMy(int companyId, bool assigned, int pageNumber)
         {
             var filter = new GetMyEmployeesFilter
@@ -74,6 +76,7 @@ namespace Deadline.WebApi.Controllers
 
         [HttpGet]
         [ResponseType(typeof(GetMyAmountResponse))]
+        [Route("api/employees/{companyId}/amount")]
         public async Task<IHttpActionResult> GetMyAmount(int companyId)
         {
             int amount = await _employeesRepository.GetMyAmountAsync(companyId);

@@ -217,8 +217,10 @@
     <Compile Include="Dtos\Employees\EmployeeWithProject.cs" />
     <Compile Include="Dtos\Projects\Project.cs" />
     <Compile Include="Dtos\Projects\ProjectRequirement.cs" />
+    <Compile Include="Dtos\Projects\ProjectRequirementWithAssignedEmployees.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Filters\Employees\GetMyEmployeesFilter.cs" />
+    <Compile Include="Models\Filters\Projects\GetMyProjectsFilter.cs" />
     <Compile Include="Models\Filters\Projects\GetUnessignedProjectsFilter.cs" />
     <Compile Include="AbstractRepositories\IAspNetUsersRepository.cs" />
     <Compile Include="AbstractRepositories\ICompaniesRepository.cs" />
@@ -327,6 +329,7 @@
     <Compile Include="Models\Responses\Employees\GetMyEmployeesResponse.cs" />
     <Compile Include="Models\Responses\Employees\GetUnemployedResponse.cs" />
     <Compile Include="Models\Responses\PagabableResponse.cs" />
+    <Compile Include="Models\Responses\Projects\GetMyResponse.cs" />
     <Compile Include="Models\Responses\Projects\GetUnassignedProjectsResponse.cs" />
     <Compile Include="Models\Responses\Rankings\GetPositionResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

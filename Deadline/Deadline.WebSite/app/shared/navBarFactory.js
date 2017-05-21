@@ -72,10 +72,10 @@
                 isDivider: false
             },
             {
-                href: "#",
+                href: "#projectsManage",
                 isSubHeader: false,
                 isChildren: true,
-                title: "Own",
+                title: "Manage",
                 visibleForLoggedUser: true,
                 isDivider: false
             },
